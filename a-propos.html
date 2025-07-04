@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About ExternaLux6 - Securing Tomorrow's Technology Today</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cyber-blue': '#00D4FF',
+                        'cyber-purple': '#8B5CF6',
+                        'cyber-green': '#00FF88',
+                        'cyber-dark': '#0B0F19',
+                        'cyber-gray': '#1A1F2E',
+                        'cyber-red': '#FF3366',
+                        'cyber-orange': '#FF8C00'
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'matrix': 'matrix 4s linear infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.5s ease-out forwards',
+                        'fade-in': 'fadeIn 0.3s ease-out forwards',
+                        'rotate-slow': 'rotateSlow 20s linear infinite',
+                        'bounce-slow': 'bounceSlow 3s ease-in-out infinite',
+                        'scan': 'scan 3s linear infinite',
+                        'code-rain': 'codeRain 8s linear infinite',
+                        'cyber-pulse': 'cyberPulse 2s ease-in-out infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(3deg); }
+        }
+        @keyframes matrix {
+            0% { stroke-dashoffset: 1000; opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { stroke-dashoffset: 0; opacity: 0.3; }
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+            to { box-shadow: 0 0 40px rgba(0, 212, 255, 0.6), 0 0 60px rgba(139, 92, 246, 0.3); }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes rotateSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes bounceSlow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+        @keyframes codeRain {
+            0% { transform: translateY(-100%); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        @keyframes cyberPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        .cyber-gradient {
+            background: linear-gradient(135deg, #00D4FF 0%, #8B5CF6 50%, #00FF88 100%);
+        }
+        .cyber-glow {
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+        }
+        .hero-bg {
+            background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.1) 0%, rgba(11, 15, 25, 1) 70%);
+        }
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 212, 255, 0.3);
+        }
+        .timeline-line {
+            background: linear-gradient(to bottom, #00D4FF, #8B5CF6, #00FF88, #00D4FF);
+        }
+        .value-card {
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        .value-card:hover::before {
+            left: 100%;
+        }
+        .team-card {
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        .team-card:hover::before {
+            left: 100%;
+        }
+        .security-grid {
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, #00D4FF, transparent);
+            animation: scan 4s linear infinite;
+        }
+        .code-rain {
+            position: absolute;
+            color: #00FF88;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            opacity: 0.3;
+            animation: codeRain 8s linear infinite;
+        }
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00D4FF, #8B5CF6, #00FF88, #00D4FF, transparent);
+        }
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        .rotating-element {
+            animation: rotateSlow 20s linear infinite;
+        }
+        .glitch-text {
+            position: relative;
+        }
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .glitch-text::before {
+            animation: glitch-1 0.5s infinite;
+            color: #00FF88;
+            z-index: -1;
+        }
+        .glitch-text::after {
+            animation: glitch-2 0.5s infinite;
+            color: #FF3366;
+            z-index: -2;
+        }
+        @keyframes glitch-1 {
+            0%, 14%, 15%, 49%, 50%, 99%, 100% { transform: translate(0); }
+            15%, 49% { transform: translate(-2px, 2px); }
+        }
+        @keyframes glitch-2 {
+            0%, 20%, 21%, 62%, 63%, 99%, 100% { transform: translate(0); }
+            21%, 62% { transform: translate(2px, -2px); }
+        }
+        .leaflet-container {
+            border-radius: 1rem;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-cyber-dark text-white overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-cyber-dark/90 backdrop-blur-md border-b border-cyber-blue/30">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 cyber-gradient rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <div class="text-2xl font-bold cyber-gradient bg-clip-text text-transparent">
+                        <a href="index.html">ExternaLux6</a>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="hover:text-cyber-blue transition-colors duration-300">Home</a>
+                    <a href="about.html" class="text-cyber-blue">About</a>
+                    <a href="projects.html" class="hover:text-cyber-blue transition-colors duration-300">Projects</a>
+                    <a href="contact.html" class="hover:text-cyber-blue transition-colors duration-300">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-white hover:text-cyber-blue transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden bg-cyber-dark/95 backdrop-blur-md border-t border-cyber-blue/20 mt-4 rounded-lg hidden">
+                <div class="px-6 py-4 space-y-4">
+                    <a href="index.html" class="block hover:text-cyber-blue transition-colors">Home</a>
+                    <a href="about.html" class="block text-cyber-blue">About</a>
+                    <a href="projects.html" class="block hover:text-cyber-blue transition-colors">Projects</a>
+                    <a href="contact.html" class="block hover:text-cyber-blue transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="about" class="min-h-screen flex items-center justify-center hero-bg relative overflow-hidden pt-20">
+        <!-- Security Grid Background -->
+        <div class="absolute inset-0 security-grid opacity-20"></div>
+        
+        <!-- Scanning Line Effect -->
+        <div class="scan-line"></div>
+
+        <!-- Code Rain Effect -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="code-rain" style="left: 5%; animation-delay: 0s;">SECURE</div>
+            <div class="code-rain" style="left: 15%; animation-delay: 1s;">01101001</div>
+            <div class="code-rain" style="left: 25%; animation-delay: 2s;">ENCRYPT</div>
+            <div class="code-rain" style="left: 35%; animation-delay: 3s;">11010110</div>
+            <div class="code-rain" style="left: 45%; animation-delay: 4s;">PROTECT</div>
+            <div class="code-rain" style="left: 55%; animation-delay: 5s;">10110101</div>
+            <div class="code-rain" style="left: 65%; animation-delay: 6s;">DEFEND</div>
+            <div class="code-rain" style="left: 75%; animation-delay: 7s;">01011010</div>
+            <div class="code-rain" style="left: 85%; animation-delay: 8s;">SECURE</div>
+            <div class="code-rain" style="left: 95%; animation-delay: 9s;">11001100</div>
+        </div>
+
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0">
+            <svg class="w-full h-full opacity-20" viewBox="0 0 1000 1000">
+                <defs>
+                    <linearGradient id="aboutGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#00D4FF"/>
+                        <stop offset="50%" style="stop-color:#8B5CF6"/>
+                        <stop offset="100%" style="stop-color:#00FF88"/>
+                    </linearGradient>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge> 
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                
+                <!-- Floating geometric shapes -->
+                <g class="floating-element">
+                    <polygon points="200,150 250,100 300,150 250,200" stroke="url(#aboutGrad)" stroke-width="3" fill="none" filter="url(#glow)"/>
+                </g>
+                <g class="rotating-element">
+                    <circle cx="800" cy="200" r="60" stroke="url(#aboutGrad)" stroke-width="3" fill="none" filter="url(#glow)"/>
+                </g>
+                <g class="floating-element" style="animation-delay: -2s;">
+                    <rect x="100" y="700" width="100" height="100" stroke="url(#aboutGrad)" stroke-width="3" fill="none" filter="url(#glow)" transform="rotate(45 150 750)"/>
+                </g>
+                <g class="rotating-element" style="animation-delay: -10s;">
+                    <polygon points="700,800 750,750 800,800 750,850" stroke="url(#aboutGrad)" stroke-width="3" fill="none" filter="url(#glow)"/>
+                </g>
+                
+                <!-- Circuit paths -->
+                <path d="M50,500 Q200,300 400,500 T750,500" stroke="url(#aboutGrad)" stroke-width="4" fill="none" stroke-dasharray="25,15" class="animate-matrix"/>
+                <path d="M500,50 Q700,200 500,400 T500,750" stroke="url(#aboutGrad)" stroke-width="3" fill="none" stroke-dasharray="20,10" class="animate-matrix" style="animation-delay: -2s;"/>
+            </svg>
+        </div>
+
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="hero-content opacity-0">
+                <h1 class="text-5xl md:text-8xl font-bold mb-8 leading-tight">
+                    <span class="glitch-text" data-text="About">About</span><br>
+                    <span class="cyber-gradient bg-clip-text text-transparent">ExternaLux6</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-12 text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                    Discover the story, vision, and team behind tomorrow's cybersecurity innovations. 
+                    Since July 2023, we've been pioneering the future of secure software development.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <button onclick="scrollToSection('history')" class="px-10 py-5 cyber-gradient text-white font-bold rounded-full hover:scale-105 transition-all duration-300 cyber-glow animate-glow">
+                        Our Journey
+                    </button>
+                    <button onclick="scrollToSection('team')" class="px-10 py-5 border-2 border-cyber-green text-cyber-green font-bold rounded-full hover:bg-cyber-green hover:text-white transition-all duration-300">
+                        Meet the Team
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Tech Elements -->
+        <div class="absolute top-1/4 right-10 floating-element hidden lg:block">
+            <svg class="w-32 h-32 text-cyber-blue opacity-30" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="25" stroke="currentColor" stroke-width="2" fill="none"/>
+                <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="1" fill="none" stroke-dasharray="8,8"/>
+                <circle cx="50" cy="50" r="4" fill="currentColor"/>
+                <path d="M30,30 L70,70 M70,30 L30,70" stroke="currentColor" stroke-width="2"/>
+            </svg>
+        </div>
+        
+        <div class="absolute bottom-1/4 left-10 rotating-element hidden lg:block">
+            <svg class="w-40 h-40 text-cyber-green opacity-20" viewBox="0 0 100 100">
+                <polygon points="50,10 90,30 90,70 50,90 10,70 10,30" stroke="currentColor" stroke-width="2" fill="none"/>
+                <polygon points="50,25 75,35 75,65 50,75 25,65 25,35" stroke="currentColor" stroke-width="1" fill="none"/>
+                <circle cx="50" cy="50" r="8" fill="currentColor" opacity="0.5"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- History Section -->
+    <section id="history" class="py-24 bg-cyber-gray relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl font-bold mb-8 history-title opacity-0">Our Journey</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto history-subtitle opacity-0">
+                    A rapid ascent in cybersecurity and software innovation
+                </p>
+            </div>
+
+            <!-- Timeline -->
+            <div class="relative max-w-5xl mx-auto">
+                <div class="timeline-line absolute left-1/2 transform -translate-x-1/2 w-1 h-full"></div>
+                
+                <!-- July 2023 - Foundation -->
+                <div class="timeline-item flex items-center mb-20 opacity-0" data-year="2023">
+                    <div class="w-1/2 pr-10 text-right">
+                        <div class="bg-cyber-dark/50 p-8 rounded-3xl border border-cyber-blue/20 card-hover">
+                            <h3 class="text-3xl font-bold mb-4 text-cyber-blue">July 17, 2023 - Foundation</h3>
+                            <p class="text-gray-300 mb-6 text-lg leading-relaxed">
+                                ExternaLux6 was born from a vision to secure tomorrow's technology today. 
+                                Founded with the mission to develop cutting-edge software solutions and cybersecurity technologies.
+                            </p>
+                            <div class="flex justify-end space-x-3">
+                                <span class="px-4 py-2 bg-cyber-blue/20 text-cyber-blue rounded-full text-sm font-semibold">Startup</span>
+                                <span class="px-4 py-2 bg-cyber-blue/20 text-cyber-blue rounded-full text-sm font-semibold">Vision</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-cyber-blue rounded-full border-4 border-cyber-dark z-10 animate-cyber-pulse"></div>
+                    <div class="w-1/2 pl-10"></div>
+                </div>
+
+                <!-- October 2023 - First Success -->
+                <div class="timeline-item flex items-center mb-20 opacity-0" data-year="2023">
+                    <div class="w-1/2 pr-10"></div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-cyber-green rounded-full border-4 border-cyber-dark z-10 animate-cyber-pulse"></div>
+                    <div class="w-1/2 pl-10">
+                        <div class="bg-cyber-dark/50 p-8 rounded-3xl border border-cyber-green/20 card-hover">
+                            <h3 class="text-3xl font-bold mb-4 text-cyber-green">October 31, 2023 - First Breakthrough</h3>
+                            <p class="text-gray-300 mb-6 text-lg leading-relaxed">
+                                Launch of <strong>01mana.com</strong> - our first enterprise marketplace platform. 
+                                Achieved <strong>20+ users within hours</strong> of launch, marking a significant milestone for our founder.
+                            </p>
+                            <div class="flex space-x-3">
+                                <span class="px-4 py-2 bg-cyber-green/20 text-cyber-green rounded-full text-sm font-semibold">01mana.com</span>
+                                <span class="px-4 py-2 bg-cyber-green/20 text-cyber-green rounded-full text-sm font-semibold">20+ Users</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2024 - Expansion -->
+                <div class="timeline-item flex items-center mb-20 opacity-0" data-year="2024">
+                    <div class="w-1/2 pr-10 text-right">
+                        <div class="bg-cyber-dark/50 p-8 rounded-3xl border border-cyber-purple/20 card-hover">
+                            <h3 class="text-3xl font-bold mb-4 text-cyber-purple">2024 - Rapid Expansion</h3>
+                            <p class="text-gray-300 mb-6 text-lg leading-relaxed">
+                                Launched multiple innovative projects including <strong>devrated.com</strong> SaaS platform 
+                                and <strong>OffDem</strong> productivity suite (web extension + mobile app). Established our core product portfolio.
+                            </p>
+                            <div class="flex justify-end space-x-3">
+                                <span class="px-4 py-2 bg-cyber-purple/20 text-cyber-purple rounded-full text-sm font-semibold">devrated.com</span>
+                                <span class="px-4 py-2 bg-cyber-purple/20 text-cyber-purple rounded-full text-sm font-semibold">OffDem Suite</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-cyber-purple rounded-full border-4 border-cyber-dark z-10 animate-cyber-pulse"></div>
+                    <div class="w-1/2 pl-10"></div>
+                </div>
+
+                <!-- 2025 - Security Division -->
+                <div class="timeline-item flex items-center opacity-0" data-year="2025">
+                    <div class="w-1/2 pr-10"></div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-cyber-red rounded-full border-4 border-cyber-dark z-10 animate-cyber-pulse"></div>
+                    <div class="w-1/2 pl-10">
+                        <div class="bg-cyber-dark/50 p-8 rounded-3xl border border-cyber-red/20 card-hover">
+                            <h3 class="text-3xl font-bold mb-4 text-cyber-red">2025 - Security Research Division</h3>
+                            <p class="text-gray-300 mb-6 text-lg leading-relaxed">
+                                Established our <strong>Cybersecurity Research & Ethical Hacking Department</strong>. 
+                                Expanding into advanced threat detection, penetration testing, and quantum-resistant security solutions.
+                            </p>
+                            <div class="flex space-x-3">
+                                <span class="px-4 py-2 bg-cyber-red/20 text-cyber-red rounded-full text-sm font-semibold">Cybersecurity R&D</span>
+                                <span class="px-4 py-2 bg-cyber-red/20 text-cyber-red rounded-full text-sm font-semibold">Ethical Hacking</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- Mission & Vision Section -->
+    <section class="py-24 bg-cyber-dark relative">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <!-- Mission -->
+                <div class="mission-content opacity-0">
+                    <div class="mb-10">
+                        <h2 class="text-5xl font-bold mb-8">
+                            Our <span class="cyber-gradient bg-clip-text text-transparent">Mission</span>
+                        </h2>
+                        <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                            To develop cutting-edge software solutions and cybersecurity technologies that empower humanity 
+                            while protecting digital futures. We secure tomorrow's technology today.
+                        </p>
+                        <p class="text-gray-400 leading-relaxed text-lg">
+                            We believe that innovation and security must go hand in hand. Our mission is to create 
+                            software that not only pushes technological boundaries but also establishes new standards 
+                            for digital security and user protection.
+                        </p>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-4 h-4 bg-cyber-blue rounded-full animate-pulse"></div>
+                            <span class="text-gray-300 text-lg">Secure-by-design software architecture</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-4 h-4 bg-cyber-green rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
+                            <span class="text-gray-300 text-lg">Advanced threat detection and prevention</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-4 h-4 bg-cyber-purple rounded-full animate-pulse" style="animation-delay: 1s;"></div>
+                            <span class="text-gray-300 text-lg">Ethical hacking and vulnerability assessment</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-4 h-4 bg-cyber-red rounded-full animate-pulse" style="animation-delay: 1.5s;"></div>
+                            <span class="text-gray-300 text-lg">Quantum-resistant security solutions</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vision -->
+                <div class="vision-content opacity-0">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-cyber-blue/10 to-cyber-purple/10 rounded-3xl transform rotate-2"></div>
+                        <div class="relative bg-cyber-gray/50 p-10 rounded-3xl border border-cyber-blue/20 backdrop-blur-sm">
+                            <h2 class="text-5xl font-bold mb-8">
+                                Our <span class="cyber-gradient bg-clip-text text-transparent">Vision</span>
+                            </h2>
+                            <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                                To become the global leader in secure software innovation by 2030, 
+                                setting new standards for cybersecurity and digital protection worldwide.
+                            </p>
+                            <div class="space-y-8">
+                                <div class="border-l-4 border-cyber-blue pl-8">
+                                    <h4 class="font-bold text-cyber-blue mb-3 text-lg">2025 - Security Leadership</h4>
+                                    <p class="text-gray-400">Establish cybersecurity research division and launch quantum-resistant solutions</p>
+                                </div>
+                                <div class="border-l-4 border-cyber-green pl-8">
+                                    <h4 class="font-bold text-cyber-green mb-3 text-lg">2027 - Global Expansion</h4>
+                                    <p class="text-gray-400">International presence with 100+ enterprise clients and advanced AI security</p>
+                                </div>
+                                <div class="border-l-4 border-cyber-purple pl-8">
+                                    <h4 class="font-bold text-cyber-purple mb-3 text-lg">2030 - Industry Standard</h4>
+                                    <p class="text-gray-400">Define global cybersecurity standards and protect millions of users worldwide</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- Values Section -->
+    <section class="py-24 bg-cyber-gray">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl font-bold mb-8 values-title opacity-0">Our Core Values</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto values-subtitle opacity-0">
+                    The principles that drive every decision and innovation at ExternaLux6
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <!-- Security First -->
+                <div class="value-card bg-cyber-dark/50 p-10 rounded-3xl text-center card-hover opacity-0">
+                    <div class="w-20 h-20 mx-auto mb-8 cyber-gradient rounded-full flex items-center justify-center">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6">Security First</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Security is not an afterthought—it's the foundation of everything we build and every decision we make.
+                    </p>
+                </div>
+
+                <!-- Innovation -->
+                <div class="value-card bg-cyber-dark/50 p-10 rounded-3xl text-center card-hover opacity-0">
+                    <div class="w-20 h-20 mx-auto mb-8 cyber-gradient rounded-full flex items-center justify-center">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6">Innovation</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Constantly pushing the boundaries of what's possible in cybersecurity and software development.
+                    </p>
+                </div>
+
+                <!-- Transparency -->
+                <div class="value-card bg-cyber-dark/50 p-10 rounded-3xl text-center card-hover opacity-0">
+                    <div class="w-20 h-20 mx-auto mb-8 cyber-gradient rounded-full flex items-center justify-center">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6">Transparency</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Open communication, ethical practices, and honest relationships with our clients and partners.
+                    </p>
+                </div>
+
+                <!-- Excellence -->
+                <div class="value-card bg-cyber-dark/50 p-10 rounded-3xl text-center card-hover opacity-0">
+                    <div class="w-20 h-20 mx-auto mb-8 cyber-gradient rounded-full flex items-center justify-center">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6">Excellence</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Pursuing perfection in every line of code, every security protocol, and every client interaction.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- Location Section -->
+    <section id="location" class="py-24 bg-cyber-dark">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl font-bold mb-8 location-title opacity-0">Our Location</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto location-subtitle opacity-0">
+                    Strategically positioned in the heart of Silicon Valley's innovation ecosystem
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <!-- Map -->
+                <div class="map-container opacity-0">
+                    <div id="map" class="h-96 rounded-3xl cyber-glow"></div>
+                </div>
+
+                <!-- Information -->
+                <div class="location-info opacity-0">
+                    <div class="space-y-10">
+                        <div class="bg-cyber-gray/50 p-8 rounded-3xl border border-cyber-blue/20">
+                            <h3 class="text-3xl font-bold mb-6 text-cyber-blue">Headquarters</h3>
+                            <div class="space-y-6">
+                                <div class="flex items-center space-x-4">
+                                    <svg class="w-6 h-6 text-cyber-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                    <span class="text-lg">San Francisco, CA 94105</span>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <svg class="w-6 h-6 text-cyber-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                    </svg>
+                                    <span class="text-lg">+1 (555) 123-4567</span>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <svg class="w-6 h-6 text-cyber-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    </svg>
+                                    <span class="text-lg">contact@externallux6.com</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-cyber-gray/50 p-8 rounded-3xl border border-cyber-green/20">
+                            <h3 class="text-3xl font-bold mb-6 text-cyber-green">Security Lab</h3>
+                            <div class="space-y-6">
+                                <div class="flex items-center space-x-4">
+                                    <svg class="w-6 h-6 text-cyber-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 7.172V5L8 4z"/>
+                                    </svg>
+                                    <span class="text-lg">5,000 sq ft research facility</span>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <svg class="w-6 h-6 text-cyber-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    <span class="text-lg">SOC 2 Type II certified</span>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <svg class="w-6 h-6 text-cyber-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                    </svg>
+                                    <span class="text-lg">Advanced penetration testing lab</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button class="px-10 py-5 cyber-gradient text-white font-bold rounded-full hover:scale-105 transition-all duration-300 cyber-glow">
+                                Schedule a Visit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- Team Section -->
+    <section id="team" class="py-24 bg-cyber-gray">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl font-bold mb-8 team-title opacity-0">Our Team</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto team-subtitle opacity-0">
+                    The cybersecurity experts and innovators behind ExternaLux6's success
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Founder & CEO -->
+                <div class="team-card bg-cyber-dark/50 rounded-3xl overflow-hidden card-hover opacity-0">
+                    <div class="relative">
+                        <div class="aspect-square bg-gradient-to-br from-cyber-blue/20 to-cyber-purple/20 flex items-center justify-center">
+                            <svg class="w-32 h-32 text-cyber-blue" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-cyber-blue/80 text-white px-4 py-2 rounded-full text-sm font-bold backdrop-blur-sm">
+                                Founder & CEO
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3">Alex Chen</h3>
+                        <p class="text-cyber-blue mb-4 text-lg">Founder & CEO</p>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Visionary leader with 12+ years in cybersecurity and software development. 
+                            Former security architect at major tech companies, passionate about securing digital futures.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 bg-cyber-blue/20 rounded-full flex items-center justify-center hover:bg-cyber-blue transition-colors">
+                                <svg class="w-5 h-5 text-cyber-blue" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-cyber-blue/20 rounded-full flex items-center justify-center hover:bg-cyber-blue transition-colors">
+                                <svg class="w-5 h-5 text-cyber-blue" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTO -->
+                <div class="team-card bg-cyber-dark/50 rounded-3xl overflow-hidden card-hover opacity-0">
+                    <div class="relative">
+                        <div class="aspect-square bg-gradient-to-br from-cyber-green/20 to-cyber-blue/20 flex items-center justify-center">
+                            <svg class="w-32 h-32 text-cyber-green" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-cyber-green/80 text-white px-4 py-2 rounded-full text-sm font-bold backdrop-blur-sm">
+                                CTO
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3">Sarah Rodriguez</h3>
+                        <p class="text-cyber-green mb-4 text-lg">Chief Technology Officer</p>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Technical architect with expertise in secure software development and cloud infrastructure. 
+                            PhD in Computer Science, specializing in cryptography and distributed systems.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 bg-cyber-green/20 rounded-full flex items-center justify-center hover:bg-cyber-green transition-colors">
+                                <svg class="w-5 h-5 text-cyber-green" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-cyber-green/20 rounded-full flex items-center justify-center hover:bg-cyber-green transition-colors">
+                                <svg class="w-5 h-5 text-cyber-green" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Head of Security -->
+                <div class="team-card bg-cyber-dark/50 rounded-3xl overflow-hidden card-hover opacity-0">
+                    <div class="relative">
+                        <div class="aspect-square bg-gradient-to-br from-cyber-red/20 to-cyber-purple/20 flex items-center justify-center">
+                            <svg class="w-32 h-32 text-cyber-red" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-cyber-red/80 text-white px-4 py-2 rounded-full text-sm font-bold backdrop-blur-sm">
+                                Security Lead
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3">Marcus Johnson</h3>
+                        <p class="text-cyber-red mb-4 text-lg">Head of Security Research</p>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Ethical hacker and security researcher with 15+ years in penetration testing. 
+                            CISSP certified, leads our cybersecurity research and threat intelligence division.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 bg-cyber-red/20 rounded-full flex items-center justify-center hover:bg-cyber-red transition-colors">
+                                <svg class="w-5 h-5 text-cyber-red" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-cyber-red/20 rounded-full flex items-center justify-center hover:bg-cyber-red transition-colors">
+                                <svg class="w-5 h-5 text-cyber-red" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lead Developer -->
+                <div class="team-card bg-cyber-dark/50 rounded-3xl overflow-hidden card-hover opacity-0">
+                    <div class="relative">
+                        <div class="aspect-square bg-gradient-to-br from-cyber-purple/20 to-cyber-blue/20 flex items-center justify-center">
+                            <svg class="w-32 h-32 text-cyber-purple" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-cyber-purple/80 text-white px-4 py-2 rounded-full text-sm font-bold backdrop-blur-sm">
+                                Lead Developer
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3">Elena Petrov</h3>
+                        <p class="text-cyber-purple mb-4 text-lg">Lead Software Engineer</p>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Full-stack developer specializing in secure application architecture. 
+                            Expert in modern frameworks and DevSecOps practices, passionate about clean code.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 bg-cyber-purple/20 rounded-full flex items-center justify-center hover:bg-cyber-purple transition-colors">
+                                <svg class="w-5 h-5 text-cyber-purple" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-cyber-purple/20 rounded-full flex items-center justify-center hover:bg-cyber-purple transition-colors">
+                                <svg class="w-5 h-5 text-cyber-purple" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DevOps Engineer -->
+                <div class="team-card bg-cyber-dark/50 rounded-3xl overflow-hidden card-hover opacity-0">
+                    <div class="relative">
+                        <div class="aspect-square bg-gradient-to-br from-cyber-orange/20 to-cyber-green/20 flex items-center justify-center">
+                            <svg class="w-32 h-32 text-cyber-orange" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-cyber-orange/80 text-white px-4 py-2 rounded-full text-sm font-bold backdrop-blur-sm">
+                                DevOps
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3">David Kim</h3>
+                        <p class="text-cyber-orange mb-4 text-lg">DevOps Engineer</p>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Infrastructure automation specialist with expertise in cloud security and CI/CD pipelines. 
+                            Ensures our deployments are secure, scalable, and reliable.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 bg-cyber-orange/20 rounded-full flex items-center justify-center hover:bg-cyber-orange transition-colors">
+                                <svg class="w-5 h-5 text-cyber-orange" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-cyber-orange/20 rounded-full flex items-center justify-center hover:bg-cyber-orange transition-colors">
+                                <svg class="w-5 h-5 text-cyber-orange" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UX/UI Designer -->
+                <div class="team-card bg-cyber-dark/50 rounded-3xl overflow-hidden card-hover opacity-0">
+                    <div class="relative">
+                        <div class="aspect-square bg-gradient-to-br from-pink-500/20 to-cyber-purple/20 flex items-center justify-center">
+                            <svg class="w-32 h-32 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-pink-500/80 text-white px-4 py-2 rounded-full text-sm font-bold backdrop-blur-sm">
+                                UX/UI Design
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3">Maya Patel</h3>
+                        <p class="text-pink-400 mb-4 text-lg">UX/UI Designer</p>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Creative designer focused on security-conscious user experiences. 
+                            Specializes in making complex cybersecurity tools intuitive and accessible.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 bg-pink-500/20 rounded-full flex items-center justify-center hover:bg-pink-500 transition-colors">
+                                <svg class="w-5 h-5 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-pink-500/20 rounded-full flex items-center justify-center hover:bg-pink-500 transition-colors">
+                                <svg class="w-5 h-5 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 19c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2v-7H8v7zM20.5 6H17V4c0-1.1-.9-2-2-2h-2c-1.1 0-2 .9-2 2v2H7.5l-.5.01L7 6.99 20.5 6z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-16">
+                <p class="text-gray-400 mb-8 text-lg">
+                    And a growing team of 15+ cybersecurity experts, developers, and researchers 
+                    who contribute to our mission every day
+                </p>
+                <button class="px-10 py-5 border-2 border-cyber-blue text-cyber-blue font-bold rounded-full hover:bg-cyber-blue hover:text-white transition-all duration-300">
+                    Join Our Team
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-cyber-gray py-20">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-8">
+                        <div class="w-12 h-12 cyber-gradient rounded-xl flex items-center justify-center">
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <div class="text-3xl font-bold cyber-gradient bg-clip-text text-transparent">
+                            ExternaLux6
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-8 max-w-md text-lg">
+                        Since July 2023, we've been pioneering the future of cybersecurity and software development. 
+                        Discover our journey and join our mission to secure tomorrow's technology.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-12 h-12 bg-cyber-blue rounded-full flex items-center justify-center hover:bg-cyber-purple transition-colors duration-300">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-cyber-blue rounded-full flex items-center justify-center hover:bg-cyber-purple transition-colors duration-300">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-cyber-blue rounded-full flex items-center justify-center hover:bg-cyber-purple transition-colors duration-300">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-8">Navigation</h3>
+                    <ul class="space-y-4">
+                        <li><a href="index.html" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">Home</a></li>
+                        <li><a href="projects.html" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">Projects</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">About</a></li>
+                        <li><a href="index.html#services" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">Services</a></li>
+                        <li><a href="index.html#solutions" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">Solutions</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-8">Contact</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center text-gray-400">
+                            <svg class="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            San Francisco, CA
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <svg class="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                            contact@externallux6.com
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <svg class="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                            </svg>
+                            +1 (555) 123-4567
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-16 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm">
+                        © 2024 ExternaLux6. All rights reserved.
+                    </p>
+                    <p class="text-gray-400 text-sm mt-4 md:mt-0">
+                        Security • Innovation • Excellence
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animation
+        gsap.set('.hero-content', { opacity: 0, y: 50 });
+        gsap.to('.hero-content', { 
+            opacity: 1, 
+            y: 0, 
+            duration: 2, 
+            ease: 'power3.out',
+            delay: 0.5 
+        });
+
+        // History Section Animations
+        gsap.set('.history-title, .history-subtitle', { opacity: 0, y: 30 });
+        ScrollTrigger.create({
+            trigger: '#history',
+            start: 'top 80%',
+            onEnter: () => {
+                gsap.to('.history-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
+                gsap.to('.history-subtitle', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.2 });
+            }
+        });
+
+        // Timeline Animation
+        gsap.set('.timeline-item', { opacity: 0, x: -60 });
+        ScrollTrigger.batch('.timeline-item', {
+            onEnter: (elements) => {
+                gsap.to(elements, {
+                    opacity: 1,
+                    x: 0,
+                    stagger: 0.3,
+                    duration: 1,
+                    ease: 'power3.out'
+                });
+            },
+            start: 'top 80%'
+        });
+
+        // Mission & Vision Animation
+        gsap.set('.mission-content, .vision-content', { opacity: 0, y: 60 });
+        ScrollTrigger.batch('.mission-content, .vision-content', {
+            onEnter: (elements) => {
+                gsap.to(elements, {
+                    opacity: 1,
+                    y: 0,
+                    stagger: 0.3,
+                    duration: 1,
+                    ease: 'power3.out'
+                });
+            },
+            start: 'top 80%'
+        });
+
+        // Values Section Animation
+        gsap.set('.values-title, .values-subtitle', { opacity: 0, y: 30 });
+        gsap.set('.value-card', { opacity: 0, y: 60 });
+        
+        ScrollTrigger.create({
+            trigger: '.values-title',
+            start: 'top 80%',
+            onEnter: () => {
+                gsap.to('.values-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
+                gsap.to('.values-subtitle', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.2 });
+            }
+        });
+
+        ScrollTrigger.batch('.value-card', {
+            onEnter: (elements) => {
+                gsap.to(elements, {
+                    opacity: 1,
+                    y: 0,
+                    stagger: 0.15,
+                    duration: 1,
+                    ease: 'power3.out'
+                });
+            },
+            start: 'top 80%'
+        });
+
+        // Location Section Animation
+        gsap.set('.location-title, .location-subtitle', { opacity: 0, y: 30 });
+        gsap.set('.map-container, .location-info', { opacity: 0, y: 60 });
+        
+        ScrollTrigger.create({
+            trigger: '.location-title',
+            start: 'top 80%',
+            onEnter: () => {
+                gsap.to('.location-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
+                gsap.to('.location-subtitle', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.2 });
+            }
+        });
+
+        ScrollTrigger.batch('.map-container, .location-info', {
+            onEnter: (elements) => {
+                gsap.to(elements, {
+                    opacity: 1,
+                    y: 0,
+                    stagger: 0.3,
+                    duration: 1,
+                    ease: 'power3.out'
+                });
+            },
+            start: 'top 80%'
+        });
+
+        // Team Section Animation
+        gsap.set('.team-title, .team-subtitle', { opacity: 0, y: 30 });
+        gsap.set('.team-card', { opacity: 0, scale: 0.8 });
+        
+        ScrollTrigger.create({
+            trigger: '.team-title',
+            start: 'top 80%',
+            onEnter: () => {
+                gsap.to('.team-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
+                gsap.to('.team-subtitle', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.2 });
+            }
+        });
+
+        ScrollTrigger.batch('.team-card', {
+            onEnter: (elements) => {
+                gsap.to(elements, {
+                    opacity: 1,
+                    scale: 1,
+                    stagger: 0.15,
+                    duration: 1,
+                    ease: 'back.out(1.7)'
+                });
+            },
+            start: 'top 80%'
+        });
+
+        // Initialize Map
+        function initMap() {
+            // San Francisco coordinates
+            const map = L.map('map').setView([37.7749, -122.4194], 13);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Custom marker
+            const customIcon = L.divIcon({
+                className: 'custom-marker',
+                html: '<div class="w-8 h-8 bg-cyber-blue rounded-full border-4 border-white shadow-lg animate-pulse"></div>',
+                iconSize: [32, 32],
+                iconAnchor: [16, 16]
+            });
+
+            L.marker([37.7749, -122.4194], { icon: customIcon })
+                .addTo(map)
+                .bindPopup('<div class="text-center p-3"><strong class="text-cyber-blue">ExternaLux6</strong><br>San Francisco, CA<br>Cybersecurity Innovation Hub</div>');
+        }
+
+        // Utility Functions
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when clicking on links
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize map when page loads
+        window.addEventListener('load', () => {
+            setTimeout(initMap, 1000); // Delay to ensure proper loading
+        });
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero-bg');
+            const speed = scrolled * 0.3;
+            parallax.style.transform = `translateY(${speed}px)`;
+        });
+
+        // Add dynamic glow effect to cards on hover
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.boxShadow = '0 25px 50px rgba(0, 212, 255, 0.4), 0 0 0 1px rgba(0, 212, 255, 0.1)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.boxShadow = '';
+            });
+        });
+
+        // Initialize page load animations
+        window.addEventListener('load', () => {
+            // Add subtle entrance animation to navigation
+            gsap.from('nav', {
+                y: -100,
+                opacity: 0,
+                duration: 1,
+                ease: 'power3.out'
+            });
+        });
+    </script>
+</body>
+</html>

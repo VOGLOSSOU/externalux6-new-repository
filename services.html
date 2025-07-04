@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ExternaLux6 Services - Advanced Software Development & Cybersecurity Solutions</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'cyber-blue': '#00D4FF',
+                    'cyber-purple': '#8B5CF6',
+                    'cyber-green': '#00FF88',
+                    'cyber-dark': '#0B0F19',
+                    'cyber-gray': '#1A1F2E',
+                    'cyber-red': '#FF3366',
+                    'cyber-orange': '#FF8C00'
+                },
+                animation: {
+                    'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    'float': 'float 6s ease-in-out infinite',
+                    'matrix': 'matrix 4s linear infinite',
+                    'glow': 'glow 2s ease-in-out infinite alternate',
+                    'slide-up': 'slideUp 0.5s ease-out forwards',
+                    'fade-in': 'fadeIn 0.3s ease-out forwards',
+                    'rotate-slow': 'rotateSlow 20s linear infinite',
+                    'bounce-slow': 'bounceSlow 3s ease-in-out infinite',
+                    'scan': 'scan 3s linear infinite',
+                    'code-rain': 'codeRain 8s linear infinite',
+                    'cyber-pulse': 'cyberPulse 2s ease-in-out infinite',
+                    'data-flow': 'dataFlow 4s linear infinite'
+                }
+            }
+        }
+    }
+</script>
+<style>
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-25px) rotate(3deg); }
+    }
+    @keyframes matrix {
+        0% { stroke-dashoffset: 1000; opacity: 0.3; }
+        50% { opacity: 1; }
+        100% { stroke-dashoffset: 0; opacity: 0.3; }
+    }
+    @keyframes glow {
+        from { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+        to { box-shadow: 0 0 40px rgba(0, 212, 255, 0.6), 0 0 60px rgba(139, 92, 246, 0.3); }
+    }
+    @keyframes slideUp {
+        from { transform: translateY(100%); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes rotateSlow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    @keyframes bounceSlow {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+    @keyframes scan {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100vw); }
+    }
+    @keyframes codeRain {
+        0% { transform: translateY(-100%); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { transform: translateY(100vh); opacity: 0; }
+    }
+    @keyframes cyberPulse {
+        0%, 100% { opacity: 0.3; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.05); }
+    }
+    @keyframes dataFlow {
+        0% { transform: translateX(-100%) rotate(0deg); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { transform: translateX(100vw) rotate(360deg); opacity: 0; }
+    }
+    .cyber-gradient {
+        background: linear-gradient(135deg, #00D4FF 0%, #8B5CF6 50%, #00FF88 100%);
+    }
+    .cyber-glow {
+        box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+    }
+    .hero-bg {
+        background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.1) 0%, rgba(11, 15, 25, 1) 70%);
+    }
+    .card-hover {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-hover:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(0, 212, 255, 0.3);
+    }
+    .service-card {
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(0, 212, 255, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+    .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+        transition: left 0.5s;
+    }
+    .service-card:hover::before {
+        left: 100%;
+    }
+    .department-card {
+        backdrop-filter: blur(20px);
+        border: 2px solid rgba(0, 212, 255, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+    .department-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.15), transparent);
+        transition: left 0.7s;
+    }
+    .department-card:hover::before {
+        left: 100%;
+    }
+    .security-grid {
+        background-image: 
+            linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+        background-size: 50px 50px;
+    }
+    .scan-line {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(to bottom, transparent, #00D4FF, transparent);
+        animation: scan 4s linear infinite;
+    }
+    .code-rain {
+        position: absolute;
+        color: #00FF88;
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        opacity: 0.3;
+        animation: codeRain 8s linear infinite;
+    }
+    .data-flow {
+        position: absolute;
+        color: #00D4FF;
+        font-family: 'Courier New', monospace;
+        font-size: 10px;
+        opacity: 0.4;
+        animation: dataFlow 4s linear infinite;
+    }
+    .section-divider {
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #00D4FF, #8B5CF6, #00FF88, #00D4FF, transparent);
+    }
+    .pricing-card {
+        background: linear-gradient(145deg, rgba(0, 212, 255, 0.1), rgba(139, 92, 246, 0.1));
+        border: 2px solid rgba(0, 212, 255, 0.3);
+        backdrop-filter: blur(15px);
+    }
+    .feature-check {
+        animation: cyberPulse 2s ease-in-out infinite;
+    }
+    .tech-icon {
+        transition: all 0.3s ease;
+    }
+    .tech-icon:hover {
+        transform: scale(1.2) rotate(10deg);
+        filter: drop-shadow(0 0 10px currentColor);
+    }
+    .process-step {
+        position: relative;
+    }
+    .process-step::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -50%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, #00D4FF, transparent);
+        transform: translateY(-50%);
+    }
+    .process-step:last-child::after {
+        display: none;
+    }
+    .modal {
+        backdrop-filter: blur(15px);
+    }
+</style>
+</head>
+<body class="bg-cyber-dark text-white overflow-x-hidden">
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-cyber-dark/90 backdrop-blur-md border-b border-cyber-blue/30">
+    <div class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 cyber-gradient rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                </div>
+                <div class="text-2xl font-bold cyber-gradient bg-clip-text text-transparent">
+                    <a href="index.html">ExternaLux6</a>
+                </div>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="hover:text-cyber-blue transition-colors duration-300">Home</a>
+                <a href="about.html" class="hover:text-cyber-blue transition-colors duration-300">About</a>
+                <a href="projects.html" class="hover:text-cyber-blue transition-colors duration-300">Projects</a>
+                <a href="services.html" class="text-cyber-blue">Services</a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-white hover:text-cyber-blue transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-cyber-dark/95 backdrop-blur-md border-t border-cyber-blue/20 mt-4 rounded-lg hidden">
+            <div class="px-6 py-4 space-y-4">
+                <a href="index.html" class="block hover:text-cyber-blue transition-colors">Home</a>
+                <a href="about.html" class="block hover:text-cyber-blue transition-colors">About</a>
+                <a href="projects.html" class="block hover:text-cyber-blue transition-colors">Projects</a>
+                <a href="services.html" class="block text-cyber-blue">Services</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="services" class="min-h-screen flex items-center justify-center hero-bg relative overflow-hidden pt-20">
+    <!-- Security Grid Background -->
+    <div class="absolute inset-0 security-grid opacity-20"></div>
+    
+    <!-- Scanning Line Effect -->
+    <div class="scan-line"></div>
+
+    <!-- Code Rain Effect -->
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="code-rain" style="left: 5%; animation-delay: 0s;">DEVELOP</div>
+        <div class="code-rain" style="left: 15%; animation-delay: 1s;">11010110</div>
+        <div class="code-rain" style="left: 25%; animation-delay: 2s;">SECURE</div>
+        <div class="code-rain" style="left: 35%; animation-delay: 3s;">01011010</div>
+        <div class="code-rain" style="left: 45%; animation-delay: 4s;">INNOVATE</div>
+        <div class="code-rain" style="left: 55%; animation-delay: 5s;">10110101</div>
+        <div class="code-rain" style="left: 65%; animation-delay: 6s;">PROTECT</div>
+        <div class="code-rain" style="left: 75%; animation-delay: 7s;">11001100</div>
+        <div class="code-rain" style="left: 85%; animation-delay: 8s;">DELIVER</div>
+        <div class="code-rain" style="left: 95%; animation-delay: 9s;">00001111</div>
+    </div>
+
+    <!-- Data Flow Effect -->
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="data-flow" style="top: 20%; animation-delay: 0s;">{'data': 'secured'}</div>
+        <div class="data-flow" style="top: 40%; animation-delay: 1.5s;">{'status': 'protected'}</div>
+        <div class="data-flow" style="top: 60%; animation-delay: 3s;">{'security': 'enabled'}</div>
+        <div class="data-flow" style="top: 80%; animation-delay: 4.5s;">{'development': 'active'}</div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="absolute inset-0">
+        <svg class="w-full h-full opacity-20" viewBox="0 0 1000 1000">
+            <defs>
+                <linearGradient id="serviceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#00D4FF"/>
+                    <stop offset="50%" style="stop-color:#8B5CF6"/>
+                    <stop offset="100%" style="stop-color:#00FF88"/>
+                </linearGradient>
+                <filter id="glow">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feMerge> 
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+            
+            <!-- Development Icons -->
+            <g class="float" style="animation: float 6s ease-in-out infinite;">
+                <rect x="150" y="150" width="80" height="80" stroke="url(#serviceGrad)" stroke-width="3" fill="none" filter="url(#glow)" rx="10"/>
+                <text x="190" y="200" fill="url(#serviceGrad)" text-anchor="middle" font-size="12" font-family="monospace">&lt;/&gt;</text>
+            </g>
+            
+            <!-- Security Shield -->
+            <g class="float" style="animation: float 8s ease-in-out infinite -2s;">
+                <polygon points="800,150 850,120 900,150 900,220 850,250 800,220" stroke="url(#serviceGrad)" stroke-width="3" fill="none" filter="url(#glow)"/>
+                <circle cx="850" cy="185" r="15" stroke="url(#serviceGrad)" stroke-width="2" fill="none"/>
+            </g>
+            
+            <!-- Database -->
+            <g class="float" style="animation: float 7s ease-in-out infinite -1s;">
+                <ellipse cx="200" cy="750" rx="60" ry="20" stroke="url(#serviceGrad)" stroke-width="3" fill="none" filter="url(#glow)"/>
+                <ellipse cx="200" cy="730" rx="60" ry="20" stroke="url(#serviceGrad)" stroke-width="3" fill="none"/>
+                <line x1="140" y1="730" x2="140" y2="750" stroke="url(#serviceGrad)" stroke-width="3"/>
+                <line x1="260" y1="730" x2="260" y2="750" stroke="url(#serviceGrad)" stroke-width="3"/>
+            </g>
+            
+            <!-- Mobile Device -->
+            <g class="float" style="animation: float 5s ease-in-out infinite -3s;">
+                <rect x="750" y="700" width="50" height="90" stroke="url(#serviceGrad)" stroke-width="3" fill="none" filter="url(#glow)" rx="8"/>
+                <circle cx="775" cy="725" r="3" fill="url(#serviceGrad)"/>
+                <rect x="760" y="740" width="30" height="40" stroke="url(#serviceGrad)" stroke-width="1" fill="none"/>
+            </g>
+            
+            <!-- Circuit paths -->
+            <path d="M100,500 Q300,200 500,500 T900,500" stroke="url(#serviceGrad)" stroke-width="4" fill="none" stroke-dasharray="25,15" class="animate-matrix"/>
+            <path d="M500,50 Q700,200 500,400 T500,750" stroke="url(#serviceGrad)" stroke-width="3" fill="none" stroke-dasharray="20,10" class="animate-matrix" style="animation-delay: -2s;"/>
+        </svg>
+    </div>
+
+    <div class="container mx-auto px-6 text-center relative z-10">
+        <div class="hero-content opacity-0">
+            <h1 class="text-5xl md:text-8xl font-bold mb-8 leading-tight">
+                Our <span class="cyber-gradient bg-clip-text text-transparent">Services</span><br>
+                <span class="text-cyber-green">& Solutions</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-12 text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                Comprehensive software development and cybersecurity solutions designed to secure your digital future. 
+                From custom applications to advanced threat protection, we deliver excellence in every line of code.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <button onclick="scrollToSection('departments')" class="px-10 py-5 cyber-gradient text-white font-bold rounded-full hover:scale-105 transition-all duration-300 cyber-glow animate-glow">
+                    Explore Services
+                </button>
+                <button onclick="openPricingModal()" class="px-10 py-5 border-2 border-cyber-green text-cyber-green font-bold rounded-full hover:bg-cyber-green hover:text-white transition-all duration-300">
+                    Get Quote
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section Divider -->
+<div class="section-divider"></div>
+
+<!-- Departments Overview Section -->
+<section id="departments" class="py-24 bg-cyber-gray">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-20">
+            <h2 class="text-5xl font-bold mb-8 departments-title opacity-0">Our Departments</h2>
+            <p class="text-xl text-gray-300 max-w-4xl mx-auto departments-subtitle opacity-0">
+                Two specialized divisions working together to deliver comprehensive digital solutions
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-16">
+            <!-- IT Development Department -->
+            <div class="department-card bg-cyber-dark/50 rounded-3xl p-12 card-hover opacity-0">
+                <div class="text-center mb-10">
+                    <div class="w-24 h-24 mx-auto mb-8 cyber-gradient rounded-full flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-4xl font-bold mb-6 text-cyber-blue">IT Development</h3>
+                    <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                        Solving daily problems with innovative code solutions. We create custom software that improves lives 
+                        and transforms businesses through cutting-edge technology.
+                    </p>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-6 h-6 bg-cyber-blue rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                        <span class="text-lg">Custom software solutions for daily challenges</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-6 h-6 bg-cyber-blue rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                        <span class="text-lg">Enterprise collaboration and integration</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-6 h-6 bg-cyber-blue rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                        <span class="text-lg">Life-improving technology development</span>
+                    </div>
+                </div>
+
+                <div class="mt-10 text-center">
+                    <button onclick="scrollToSection('development-services')" class="px-8 py-4 border-2 border-cyber-blue text-cyber-blue font-bold rounded-full hover:bg-cyber-blue hover:text-white transition-all duration-300">
+                        View Development Services
+                    </button>
+                </div>
+            </div>
+
+            <!-- IT Security Department -->
+            <div class="department-card bg-cyber-dark/50 rounded-3xl p-12 card-hover opacity-0">
+                <div class="text-center mb-10">
+                    <div class="w-24 h-24 mx-auto mb-8 cyber-gradient rounded-full flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-4xl font-bold mb-6 text-cyber-red">IT Security</h3>
+                    <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                        Dedicated cybersecurity research and protection services. We defend your digital assets 
+                        with advanced threat detection and comprehensive security strategies.
+                    </p>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-6 h-6 bg-cyber-red rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                        <span class="text-lg">Advanced cybersecurity research</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-6 h-6 bg-cyber-red rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                        <span class="text-lg">Comprehensive threat protection</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-6 h-6 bg-cyber-red rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                        <span class="text-lg">Enterprise security consulting</span>
+                    </div>
+                </div>
+
+                <div class="mt-10 text-center">
+                    <button onclick="scrollToSection('security-services')" class="px-8 py-4 border-2 border-cyber-red text-cyber-red font-bold rounded-full hover:bg-cyber-red hover:text-white transition-all duration-300">
+                        View Security Services
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section Divider -->
+<div class="section-divider"></div>
+
+<!-- Development Services Section -->
+<section id="development-services" class="py-24 bg-cyber-dark">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-20">
+            <h2 class="text-5xl font-bold mb-8 dev-title opacity-0">
+                Development <span class="cyber-gradient bg-clip-text text-transparent">Services</span>
+            </h2>
+            <p class="text-xl text-gray-300 max-w-4xl mx-auto dev-subtitle opacity-0">
+                Comprehensive software development solutions tailored to your needs
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <!-- Mobile App Development -->
+            <div class="service-card bg-cyber-gray/50 rounded-3xl p-8 card-hover opacity-0">
+                <div class="text-center mb-8">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-cyber-blue/20 to-cyber-purple/20 rounded-2xl flex items-center justify-center">
+                        <svg class="w-10 h-10 text-cyber-blue tech-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-cyber-blue">Mobile Apps</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Native and cross-platform mobile applications for iOS and Android. 
+                        From productivity tools to enterprise solutions.
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-blue rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Native iOS & Android</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-blue rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Cross-platform solutions</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-blue rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Enterprise integration</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-blue rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">App Store optimization</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Web Applications -->
+            <div class="service-card bg-cyber-gray/50 rounded-3xl p-8 card-hover opacity-0">
+                <div class="text-center mb-8">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-cyber-green/20 to-cyber-blue/20 rounded-2xl flex items-center justify-center">
+                        <svg class="w-10 h-10 text-cyber-green tech-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-cyber-green">Web Applications</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Modern web applications with responsive design and secure architecture. 
+                        From SaaS platforms to enterprise dashboards.
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-green rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Progressive Web Apps</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-green rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">SaaS platforms</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-green rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">E-commerce solutions</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-green rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">API development</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Browser Extensions -->
+            <div class="service-card bg-cyber-gray/50 rounded-3xl p-8 card-hover opacity-0">
+                <div class="text-center mb-8">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-cyber-purple/20 to-cyber-red/20 rounded-2xl flex items-center justify-center">
+                        <svg class="w-10 h-10 text-cyber-purple tech-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-cyber-purple">Extensions</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Browser extensions and productivity tools that enhance user experience 
+                        and streamline workflows across platforms.
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-purple rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Chrome & Firefox</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-purple rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Productivity tools</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-purple rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Data management</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-purple rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Security enhancements</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Tools -->
+            <div class="service-card bg-cyber-gray/50 rounded-3xl p-8 card-hover opacity-0">
+                <div class="text-center mb-8">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-cyber-orange/20 to-cyber-green/20 rounded-2xl flex items-center justify-center">
+                        <svg class="w-10 h-10 text-cyber-orange tech-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-cyber-orange">Custom Tools</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Bespoke software solutions designed specifically for your unique business 
+                        requirements and operational workflows.
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-orange rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Workflow automation</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-orange rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Data processing tools</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-orange rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Integration solutions</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-orange rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Legacy system updates</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section Divider -->
+<div class="section-divider"></div>
+
+<!-- Security Services Section -->
+<section id="security-services" class="py-24 bg-cyber-gray">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-20">
+            <h2 class="text-5xl font-bold mb-8 sec-title opacity-0">
+                Security <span class="cyber-gradient bg-clip-text text-transparent">Services</span>
+            </h2>
+            <p class="text-xl text-gray-300 max-w-4xl mx-auto sec-subtitle opacity-0">
+                Advanced cybersecurity solutions to protect your digital assets and infrastructure
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <!-- Security Policy Writing -->
+            <div class="service-card bg-cyber-dark/50 rounded-3xl p-8 card-hover opacity-0">
+                <div class="text-center mb-8">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-cyber-red/20 to-cyber-purple/20 rounded-2xl flex items-center justify-center">
+                        <svg class="w-10 h-10 text-cyber-red tech-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-cyber-red">Security Policies</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Comprehensive security policy development and documentation to establish 
+                        robust cybersecurity frameworks for your organization.
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-red rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Compliance frameworks</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-red rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Risk assessment</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-red rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Policy implementation</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-red rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Staff training programs</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Penetration Testing -->
+            <div class="service-card bg-cyber-dark/50 rounded-3xl p-8 card-hover opacity-0">
+                <div class="text-center mb-8">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-cyber-blue/20 to-cyber-red/20 rounded-2xl flex items-center justify-center">
+                        <svg class="w-10 h-10 text-cyber-blue tech-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-cyber-blue">Penetration Testing</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Comprehensive ethical hacking and vulnerability assessment to identify 
+                        and address security weaknesses before they can be exploited.
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-blue rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Network penetration</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-blue rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Web application testing</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-blue rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Social engineering tests</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-blue rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Detailed reports</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Incident Response -->
+            <div class="service-card bg-cyber-dark/50 rounded-3xl p-8 card-hover opacity-0">
+                <div class="text-center mb-8">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-cyber-orange/20 to-cyber-red/20 rounded-2xl flex items-center justify-center">
+                        <svg class="w-10 h-10 text-cyber-orange tech-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-cyber-orange">Incident Response</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Rapid response and recovery services for cybersecurity incidents, 
+                        minimizing damage and restoring operations quickly and securely.
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-orange rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">24/7 emergency response</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-orange rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Forensic analysis</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-orange rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Recovery planning</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-orange rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Prevention strategies</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Infrastructure Security -->
+            <div class="service-card bg-cyber-dark/50 rounded-3xl p-8 card-hover opacity-0">
+                <div class="text-center mb-8">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-cyber-green/20 to-cyber-blue/20 rounded-2xl flex items-center justify-center">
+                        <svg class="w-10 h-10 text-cyber-green tech-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-cyber-green">Infrastructure Security</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Comprehensive security solutions for your IT infrastructure, 
+                        from network security to cloud protection and monitoring systems.
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-green rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Network security</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-green rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Cloud security</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-green rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Monitoring systems</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-cyber-green rounded-full feature-check"></div>
+                        <span class="text-sm text-gray-300">Access control</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section Divider -->
+<div class="section-divider"></div>
+
+<!-- Process Section -->
+<section class="py-24 bg-cyber-dark">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-20">
+            <h2 class="text-5xl font-bold mb-8 process-title opacity-0">Our Process</h2>
+            <p class="text-xl text-gray-300 max-w-4xl mx-auto process-subtitle opacity-0">
+                A structured approach to delivering exceptional results on every project
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-8">
+            <!-- Step 1: Consultation -->
+            <div class="process-step text-center opacity-0">
+                <div class="w-20 h-20 mx-auto mb-6 cyber-gradient rounded-full flex items-center justify-center text-2xl font-bold">
+                    1
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-cyber-blue">Consultation</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    Initial discussion to understand your requirements, challenges, and goals. 
+                    We analyze your needs and propose tailored solutions.
+                </p>
+            </div>
+
+            <!-- Step 2: Planning -->
+            <div class="process-step text-center opacity-0">
+                <div class="w-20 h-20 mx-auto mb-6 cyber-gradient rounded-full flex items-center justify-center text-2xl font-bold">
+                    2
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-cyber-green">Planning</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    Detailed project planning including timeline, resources, security considerations, 
+                    and development methodology selection.
+                </p>
+            </div>
+
+            <!-- Step 3: Development -->
+            <div class="process-step text-center opacity-0">
+                <div class="w-20 h-20 mx-auto mb-6 cyber-gradient rounded-full flex items-center justify-center text-2xl font-bold">
+                    3
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-cyber-purple">Development</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    Agile development with regular check-ins, security-first approach, 
+                    and continuous testing throughout the development cycle.
+                </p>
+            </div>
+
+            <!-- Step 4: Delivery -->
+            <div class="process-step text-center opacity-0">
+                <div class="w-20 h-20 mx-auto mb-6 cyber-gradient rounded-full flex items-center justify-center text-2xl font-bold">
+                    4
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-cyber-red">Delivery</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    Final testing, deployment, documentation delivery, and comprehensive 
+                    support to ensure smooth operation and maintenance.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section Divider -->
+<div class="section-divider"></div>
+
+<!-- Pricing Section -->
+<section class="py-24 bg-cyber-gray">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-20">
+            <h2 class="text-5xl font-bold mb-8 pricing-title opacity-0">Pricing Approach</h2>
+            <p class="text-xl text-gray-300 max-w-4xl mx-auto pricing-subtitle opacity-0">
+                Custom pricing based on your specific requirements and project scope
+            </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="pricing-card rounded-3xl p-12 opacity-0">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold mb-6 cyber-gradient bg-clip-text text-transparent">
+                        Consultation-Based Pricing
+                    </h3>
+                    <p class="text-xl text-gray-300 leading-relaxed">
+                        Every project is unique, and so is our pricing. We believe in transparent, 
+                        fair pricing that reflects the true value and complexity of your project.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 mb-12">
+                    <div>
+                        <h4 class="text-2xl font-bold mb-6 text-cyber-blue">What Influences Pricing</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-cyber-blue rounded-full"></div>
+                                <span class="text-gray-300">Project complexity and scope</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-cyber-blue rounded-full"></div>
+                                <span class="text-gray-300">Technology stack requirements</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-cyber-blue rounded-full"></div>
+                                <span class="text-gray-300">Security level needed</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-cyber-blue rounded-full"></div>
+                                <span class="text-gray-300">Timeline and urgency</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-cyber-blue rounded-full"></div>
+                                <span class="text-gray-300">Integration requirements</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-2xl font-bold mb-6 text-cyber-green">What You Get</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-cyber-green rounded-full"></div>
+                                <span class="text-gray-300">Detailed project proposal</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-cyber-green rounded-full"></div>
+                                <span class="text-gray-300">Fixed-price quote</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-cyber-green rounded-full"></div>
+                                <span class="text-gray-300">Clear timeline and milestones</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-cyber-green rounded-full"></div>
+                                <span class="text-gray-300">Ongoing support options</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-cyber-green rounded-full"></div>
+                                <span class="text-gray-300">No hidden costs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button onclick="openPricingModal()" class="px-12 py-6 cyber-gradient text-white font-bold rounded-full hover:scale-105 transition-all duration-300 cyber-glow text-xl">
+                        Get Your Custom Quote
+                    </button>
+                    <p class="text-gray-400 mt-6">
+                        Free consultation • No commitment • Response within 24 hours
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Modal -->
+<div id="pricing-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="modal bg-cyber-gray rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-cyber-blue/30">
+        <div class="p-10">
+            <div class="flex justify-between items-start mb-8">
+                <h2 class="text-4xl font-bold cyber-gradient bg-clip-text text-transparent">Get Your Quote</h2>
+                <button onclick="closePricingModal()" class="text-gray-400 hover:text-white transition-colors">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <form id="quote-form" class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-3 text-cyber-blue">Name *</label>
+                        <input type="text" required class="w-full px-4 py-3 bg-cyber-dark border border-cyber-blue/30 rounded-lg focus:border-cyber-blue focus:outline-none text-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-3 text-cyber-blue">Email *</label>
+                        <input type="email" required class="w-full px-4 py-3 bg-cyber-dark border border-cyber-blue/30 rounded-lg focus:border-cyber-blue focus:outline-none text-white">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold mb-3 text-cyber-blue">Company</label>
+                    <input type="text" class="w-full px-4 py-3 bg-cyber-dark border border-cyber-blue/30 rounded-lg focus:border-cyber-blue focus:outline-none text-white">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold mb-3 text-cyber-blue">Service Type *</label>
+                    <select required class="w-full px-4 py-3 bg-cyber-dark border border-cyber-blue/30 rounded-lg focus:border-cyber-blue focus:outline-none text-white">
+                        <option value="">Select a service</option>
+                        <option value="mobile-app">Mobile App Development</option>
+                        <option value="web-app">Web Application</option>
+                        <option value="extension">Browser Extension</option>
+                        <option value="custom-tool">Custom Tool</option>
+                        <option value="security-policy">Security Policy Writing</option>
+                        <option value="penetration-testing">Penetration Testing</option>
+                        <option value="incident-response">Incident Response</option>
+                        <option value="infrastructure-security">Infrastructure Security</option>
+                        <option value="multiple">Multiple Services</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold mb-3 text-cyber-blue">Project Description *</label>
+                    <textarea required rows="4" class="w-full px-4 py-3 bg-cyber-dark border border-cyber-blue/30 rounded-lg focus:border-cyber-blue focus:outline-none text-white resize-none" placeholder="Describe your project requirements, goals, and any specific features you need..."></textarea>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-3 text-cyber-blue">Timeline</label>
+                        <select class="w-full px-4 py-3 bg-cyber-dark border border-cyber-blue/30 rounded-lg focus:border-cyber-blue focus:outline-none text-white">
+                            <option value="">Select timeline</option>
+                            <option value="asap">ASAP (Rush)</option>
+                            <option value="1-3months">1-3 months</option>
+                            <option value="3-6months">3-6 months</option>
+                            <option value="6months+">6+ months</option>
+                            <option value="flexible">Flexible</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-3 text-cyber-blue">Budget Range</label>
+                        <select class="w-full px-4 py-3 bg-cyber-dark border border-cyber-blue/30 rounded-lg focus:border-cyber-blue focus:outline-none text-white">
+                            <option value="">Select budget range</option>
+                            <option value="5k-15k">$5,000 - $15,000</option>
+                            <option value="15k-30k">$15,000 - $30,000</option>
+                            <option value="30k-50k">$30,000 - $50,000</option>
+                            <option value="50k+">$50,000+</option>
+                            <option value="discuss">Let's discuss</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="text-center pt-6">
+                    <button type="submit" class="px-10 py-4 cyber-gradient text-white font-bold rounded-full hover:scale-105 transition-all duration-300 cyber-glow">
+                        Submit Quote Request
+                    </button>
+                    <p class="text-gray-400 text-sm mt-4">
+                        We'll respond within 24 hours with a detailed proposal
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-cyber-gray py-20">
+    <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-12">
+            <div class="md:col-span-2">
+                <div class="flex items-center space-x-3 mb-8">
+                    <div class="w-12 h-12 cyber-gradient rounded-xl flex items-center justify-center">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <div class="text-3xl font-bold cyber-gradient bg-clip-text text-transparent">
+                        ExternaLux6
+                    </div>
+                </div>
+                <p class="text-gray-400 mb-8 max-w-md text-lg">
+                    Delivering innovative software development and cybersecurity solutions 
+                    that secure your digital future. Custom pricing for custom solutions.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-12 h-12 bg-cyber-blue rounded-full flex items-center justify-center hover:bg-cyber-purple transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="w-12 h-12 bg-cyber-blue rounded-full flex items-center justify-center hover:bg-cyber-purple transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="w-12 h-12 bg-cyber-blue rounded-full flex items-center justify-center hover:bg-cyber-purple transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold mb-8">Services</h3>
+                <ul class="space-y-4">
+                    <li><a href="#development-services" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">Software Development</a></li>
+                    <li><a href="#security-services" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">Cybersecurity</a></li>
+                    <li><a href="projects.html" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">Our Projects</a></li>
+                    <li><a href="about.html" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">About Us</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold mb-8">Contact</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-center text-gray-400">
+                        <svg class="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        San Francisco, CA
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <svg class="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        services@externallux6.com
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <svg class="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                        +1 (555) 123-4567
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-16 pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">
+                    © 2024 ExternaLux6. All rights reserved.
+                </p>
+                <p class="text-gray-400 text-sm mt-4 md:mt-0">
+                    Custom Solutions • Transparent Pricing • Excellence Delivered
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero Animation
+    gsap.set('.hero-content', { opacity: 0, y: 50 });
+    gsap.to('.hero-content', { 
+        opacity: 1, 
+        y: 0, 
+        duration: 2, 
+        ease: 'power3.out',
+        delay: 0.5 
+    });
+
+    // Departments Section Animations
+    gsap.set('.departments-title, .departments-subtitle', { opacity: 0, y: 30 });
+    gsap.set('.department-card', { opacity: 0, scale: 0.9 });
+    
+    ScrollTrigger.create({
+        trigger: '#departments',
+        start: 'top 80%',
+        onEnter: () => {
+            gsap.to('.departments-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
+            gsap.to('.departments-subtitle', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.2 });
+        }
+    });
+
+    ScrollTrigger.batch('.department-card', {
+        onEnter: (elements) => {
+            gsap.to(elements, {
+                opacity: 1,
+                scale: 1,
+                stagger: 0.3,
+                duration: 1,
+                ease: 'back.out(1.7)'
+            });
+        },
+        start: 'top 80%'
+    });
+
+    // Development Services Animation
+    gsap.set('.dev-title, .dev-subtitle', { opacity: 0, y: 30 });
+    ScrollTrigger.create({
+        trigger: '#development-services',
+        start: 'top 80%',
+        onEnter: () => {
+            gsap.to('.dev-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
+            gsap.to('.dev-subtitle', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.2 });
+        }
+    });
+
+    ScrollTrigger.batch('#development-services .service-card', {
+        onEnter: (elements) => {
+            gsap.to(elements, {
+                opacity: 1,
+                y: 0,
+                stagger: 0.15,
+                duration: 1,
+                ease: 'power3.out'
+            });
+        },
+        start: 'top 80%'
+    });
+
+    // Security Services Animation
+    gsap.set('.sec-title, .sec-subtitle', { opacity: 0, y: 30 });
+    ScrollTrigger.create({
+        trigger: '#security-services',
+        start: 'top 80%',
+        onEnter: () => {
+            gsap.to('.sec-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
+            gsap.to('.sec-subtitle', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.2 });
+        }
+    });
+
+    ScrollTrigger.batch('#security-services .service-card', {
+        onEnter: (elements) => {
+            gsap.to(elements, {
+                opacity: 1,
+                y: 0,
+                stagger: 0.15,
+                duration: 1,
+                ease: 'power3.out'
+            });
+        },
+        start: 'top 80%'
+    });
+
+    // Process Section Animation
+    gsap.set('.process-title, .process-subtitle', { opacity: 0, y: 30 });
+    gsap.set('.process-step', { opacity: 0, y: 60 });
+    
+    ScrollTrigger.create({
+        trigger: '.process-title',
+        start: 'top 80%',
+        onEnter: () => {
+            gsap.to('.process-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
+            gsap.to('.process-subtitle', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.2 });
+        }
+    });
+
+    ScrollTrigger.batch('.process-step', {
+        onEnter: (elements) => {
+            gsap.to(elements, {
+                opacity: 1,
+                y: 0,
+                stagger: 0.2,
+                duration: 1,
+                ease: 'power3.out'
+            });
+        },
+        start: 'top 80%'
+    });
+
+    // Pricing Section Animation
+    gsap.set('.pricing-title, .pricing-subtitle', { opacity: 0, y: 30 });
+    gsap.set('.pricing-card', { opacity: 0, scale: 0.95 });
+    
+    ScrollTrigger.create({
+        trigger: '.pricing-title',
+        start: 'top 80%',
+        onEnter: () => {
+            gsap.to('.pricing-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
+            gsap.to('.pricing-subtitle', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.2 });
+        }
+    });
+
+    ScrollTrigger.create({
+        trigger: '.pricing-card',
+        start: 'top 80%',
+        onEnter: () => {
+            gsap.to('.pricing-card', { opacity: 1, scale: 1, duration: 1, ease: 'back.out(1.7)' });
+        }
+    });
+
+    // Modal Functions
+    function openPricingModal() {
+        const modal = document.getElementById('pricing-modal');
+        modal.classList.remove('hidden');
+        gsap.fromTo(modal.querySelector('.modal'), 
+            { opacity: 0, scale: 0.8, y: 50 },
+            { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: 'power3.out' }
+        );
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePricingModal() {
+        const modal = document.getElementById('pricing-modal');
+        gsap.to(modal.querySelector('.modal'), {
+            opacity: 0,
+            scale: 0.8,
+            y: 50,
+            duration: 0.3,
+            ease: 'power3.in',
+            onComplete: () => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
+
+    // Form Submission
+    document.getElementById('quote-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Simple form validation and submission feedback
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
+        
+        // Simulate form submission (replace with actual submission logic)
+        setTimeout(() => {
+            submitBtn.textContent = 'Request Sent!';
+            submitBtn.classList.remove('cyber-gradient');
+            submitBtn.classList.add('bg-green-500');
+            
+            setTimeout(() => {
+                closePricingModal();
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                submitBtn.classList.add('cyber-gradient');
+                submitBtn.classList.remove('bg-green-500');
+            }, 2000);
+        }, 1500);
+    });
+
+    // Utility Functions
+    function scrollToSection(sectionId) {
+        document.getElementById(sectionId).scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on links
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    }
+
+    // Smooth Scrolling for Navigation Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Close modal when clicking outside
+    document.getElementById('pricing-modal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closePricingModal();
+        }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closePricingModal();
+        }
+    });
+
+    // Parallax effect for hero background
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelector('.hero-bg');
+        const speed = scrolled * 0.3;
+        parallax.style.transform = `translateY(${speed}px)`;
+    });
+
+    // Add dynamic glow effect to cards on hover
+    document.querySelectorAll('.card-hover').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.boxShadow = '0 25px 50px rgba(0, 212, 255, 0.4), 0 0 0 1px rgba(0, 212, 255, 0.1)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.boxShadow = '';
+        });
+    });
+
+    // Initialize page load animations
+    window.addEventListener('load', () => {
+        // Add subtle entrance animation to navigation
+        gsap.from('nav', {
+            y: -100,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+        });
+    });
+</script>
+</body>
+</html>
