@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ExternaLux6 Projects - Innovation in Software & Security</title>
+    <meta name="description" content="Discover ExternaLux6's cutting-edge software solutions and innovations - from enterprise platforms to mobile applications">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -28,7 +29,7 @@
                         'slide-up': 'slideUp 0.5s ease-out forwards',
                         'fade-in': 'fadeIn 0.3s ease-out forwards',
                         'scan': 'scan 3s linear infinite',
-                        'code-rain': 'codeRain 8s linear infinite'
+                        'counter': 'counter 2s ease-out forwards'
                     }
                 }
             }
@@ -60,11 +61,9 @@
             0% { transform: translateX(-100%); }
             100% { transform: translateX(100vw); }
         }
-        @keyframes codeRain {
-            0% { transform: translateY(-100%); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
+        @keyframes counter {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .cyber-gradient {
             background: linear-gradient(135deg, #00D4FF 0%, #8B5CF6 50%, #00FF88 100%);
@@ -101,9 +100,6 @@
         .project-card:hover::before {
             left: 100%;
         }
-        .modal {
-            backdrop-filter: blur(15px);
-        }
         .filter-btn.active {
             background: linear-gradient(135deg, #00D4FF 0%, #8B5CF6 100%);
             color: white;
@@ -126,10 +122,6 @@
         .status-badge:hover::before {
             left: 100%;
         }
-        .video-container {
-            position: relative;
-            background: linear-gradient(45deg, rgba(0, 212, 255, 0.1), rgba(139, 92, 246, 0.1));
-        }
         .security-grid {
             background-image: 
                 linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
@@ -145,32 +137,28 @@
             background: linear-gradient(to bottom, transparent, #00D4FF, transparent);
             animation: scan 4s linear infinite;
         }
-        .code-rain {
-            position: absolute;
-            color: #00FF88;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            opacity: 0.3;
-            animation: codeRain 8s linear infinite;
-        }
         .tech-stack-badge {
             background: rgba(0, 212, 255, 0.1);
             border: 1px solid rgba(0, 212, 255, 0.3);
             backdrop-filter: blur(10px);
         }
+        .logo-shadow {
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+        }
+        .cta-section {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(139, 92, 246, 0.1) 50%, rgba(0, 255, 136, 0.1) 100%);
+        }
     </style>
 </head>
 <body class="bg-cyber-dark text-white overflow-x-hidden">
     <!-- Navigation -->
-  <nav class="fixed top-0 w-full z-50 bg-cyber-dark/90 backdrop-blur-md border-b border-cyber-blue/30">
-        <div class="container mx-auto px-6 py-4">
+    <nav class="fixed top-0 w-full z-50 bg-cyber-dark/90 backdrop-blur-md border-b border-cyber-blue/30">
+        <div class="container mx-auto px-6 py-3">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 cyber-gradient rounded-lg flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                        </svg>
-                    </div>
+                    <img src="logo.png" 
+                         class="w-12 h-12 rounded-full object-cover logo-shadow border-2 border-cyan-400 hover:scale-110 transition-transform duration-300" 
+                         alt="ExternaLux6 Logo">
                     <div class="text-2xl font-bold cyber-gradient bg-clip-text text-transparent">
                         ExternaLux6
                     </div>
@@ -179,8 +167,8 @@
                     <a href="index.html" class="hover:text-cyber-blue transition-colors duration-300">Home</a>
                     <a href="about.html" class="hover:text-cyber-blue transition-colors duration-300">About</a>
                     <a href="services.html" class="hover:text-cyber-blue transition-colors duration-300">Services</a>
-                    <a href="projects.html" class="hover:text-cyber-blue transition-colors duration-300">Solutions</a>
-                    <a href="contact.html" class="text-cyber-blue">Contact</a>
+                    <a href="projects.html" class="text-cyber-blue">Solutions</a>
+                    <a href="contact.html" class="hover:text-cyber-blue transition-colors duration-300">Contact</a>
                 </div>
                 <button id="mobile-menu-btn" class="md:hidden text-white hover:text-cyber-blue transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -209,19 +197,6 @@
         <!-- Scanning Line Effect -->
         <div class="scan-line"></div>
 
-        <!-- Code Rain Effect -->
-        <div class="absolute inset-0 pointer-events-none">
-            <div class="code-rain" style="left: 10%; animation-delay: 0s;">01101001</div>
-            <div class="code-rain" style="left: 20%; animation-delay: 1s;">11010110</div>
-            <div class="code-rain" style="left: 30%; animation-delay: 2s;">10110101</div>
-            <div class="code-rain" style="left: 40%; animation-delay: 3s;">01011010</div>
-            <div class="code-rain" style="left: 50%; animation-delay: 4s;">11001100</div>
-            <div class="code-rain" style="left: 60%; animation-delay: 5s;">10101010</div>
-            <div class="code-rain" style="left: 70%; animation-delay: 6s;">01110111</div>
-            <div class="code-rain" style="left: 80%; animation-delay: 7s;">11111000</div>
-            <div class="code-rain" style="left: 90%; animation-delay: 8s;">00001111</div>
-        </div>
-
         <!-- Animated Background -->
         <div class="absolute inset-0">
             <svg class="w-full h-full opacity-20" viewBox="0 0 1000 1000">
@@ -249,12 +224,12 @@
                     <span class="text-cyber-green">Portfolio</span>
                 </h1>
                 <p class="text-xl md:text-2xl mb-12 text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                    Discover our cutting-edge software solutions and cybersecurity innovations that are shaping the digital future. 
-                    From enterprise platforms to mobile applications, each project represents our commitment to technological excellence.
+                    Discover our cutting-edge software solutions and innovations that are transforming industries worldwide. 
+                    From enterprise platforms to mobile applications, each project represents our commitment to human-centered technology.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-6 justify-center">
                     <button onclick="scrollToProjects()" class="px-10 py-5 cyber-gradient text-white font-bold rounded-full hover:scale-105 transition-all duration-300 cyber-glow animate-glow">
-                        Explore Our Projects
+                        Explore Our Solutions
                     </button>
                     <button onclick="filterProjects('live')" class="px-10 py-5 border-2 border-cyber-green text-cyber-green font-bold rounded-full hover:bg-cyber-green hover:text-white transition-all duration-300">
                         Live Projects
@@ -265,28 +240,28 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-24 bg-cyber-gray">
+    <section class="py-24 bg-cyber-gray relative z-10">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-4 gap-8">
                 <div class="text-center stats-card opacity-0">
-                    <div class="text-5xl font-bold cyber-gradient bg-clip-text text-transparent mb-4 counter" data-target="50">0</div>
-                    <h3 class="text-xl font-semibold mb-2">Projects Delivered</h3>
-                    <p class="text-gray-400">Secure solutions deployed</p>
-                </div>
-                <div class="text-center stats-card opacity-0">
-                    <div class="text-5xl font-bold cyber-gradient bg-clip-text text-transparent mb-4 counter" data-target="12">0</div>
-                    <h3 class="text-xl font-semibold mb-2">Active Projects</h3>
-                    <p class="text-gray-400">Currently in development</p>
-                </div>
-                <div class="text-center stats-card opacity-0">
                     <div class="text-5xl font-bold cyber-gradient bg-clip-text text-transparent mb-4 counter" data-target="6">0</div>
-                    <h3 class="text-xl font-semibold mb-2">Tech Domains</h3>
-                    <p class="text-gray-400">Areas of expertise</p>
+                    <h3 class="text-xl font-semibold mb-2">Live Projects</h3>
+                    <p class="text-gray-400">Active solutions deployed worldwide</p>
                 </div>
                 <div class="text-center stats-card opacity-0">
-                    <div class="text-5xl font-bold cyber-gradient bg-clip-text text-transparent mb-4 counter" data-target="98">0</div>
+                    <div class="text-5xl font-bold cyber-gradient bg-clip-text text-transparent mb-4 counter" data-target="500">0</div>
+                    <h3 class="text-xl font-semibold mb-2">Global Users</h3>
+                    <p class="text-gray-400">Businesses using our solutions</p>
+                </div>
+                <div class="text-center stats-card opacity-0">
+                    <div class="text-5xl font-bold cyber-gradient bg-clip-text text-transparent mb-4 counter" data-target="8">0</div>
+                    <h3 class="text-xl font-semibold mb-2">Tech Domains</h3>
+                    <p class="text-gray-400">Areas of innovation</p>
+                </div>
+                <div class="text-center stats-card opacity-0">
+                    <div class="text-5xl font-bold cyber-gradient bg-clip-text text-transparent mb-4 counter" data-target="100">0</div>
                     <h3 class="text-xl font-semibold mb-2">Success Rate</h3>
-                    <p class="text-gray-400">Projects delivered on time</p>
+                    <p class="text-gray-400">Projects delivered successfully</p>
                 </div>
             </div>
         </div>
@@ -300,7 +275,7 @@
                     All Projects
                 </button>
                 <button onclick="filterProjects('live')" class="filter-btn px-8 py-4 rounded-full border-2 border-cyber-green text-cyber-green font-bold transition-all hover:scale-105">
-                    Live
+                    Live Solutions
                 </button>
                 <button onclick="filterProjects('development')" class="filter-btn px-8 py-4 rounded-full border-2 border-cyber-orange text-cyber-orange font-bold transition-all hover:scale-105">
                     In Development
@@ -323,19 +298,17 @@
         <div class="container mx-auto px-6">
             <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                 
-                <!-- Project 1: 01mana.com -->
+                <!-- Project 1: Turnyx -->
                 <div class="project-card card-hover bg-cyber-gray/50 rounded-3xl overflow-hidden opacity-0" data-status="live" data-category="web">
                     <div class="relative">
-                        <div class="video-container aspect-video bg-gradient-to-br from-cyber-blue/20 to-cyber-purple/20 flex items-center justify-center">
+                        <div class="aspect-video bg-gradient-to-br from-cyber-blue/20 to-cyber-purple/20 flex items-center justify-center">
                             <div class="text-center">
                                 <div class="w-20 h-20 mx-auto mb-4 cyber-gradient rounded-full flex items-center justify-center">
                                     <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H9m0 0H5m0 0h2M7 7h10M7 11h10M7 15h10"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
                                     </svg>
                                 </div>
-                                <button onclick="openProjectModal('01mana')" class="text-cyber-blue hover:text-white transition-colors">
-                                    View Platform →
-                                </button>
+                                <p class="text-cyber-blue font-semibold">Queue Management System</p>
                             </div>
                         </div>
                         <div class="absolute top-4 right-4">
@@ -345,47 +318,45 @@
                         </div>
                         <div class="absolute top-4 left-4">
                             <span class="bg-cyber-blue/80 text-white px-4 py-2 rounded-full text-sm font-bold backdrop-blur-sm">
-                                Web Platform
+                                Enterprise Platform
                             </span>
                         </div>
                     </div>
                     <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-4">01mana.com</h3>
+                        <h3 class="text-2xl font-bold mb-4">Turnyx</h3>
                         <p class="text-gray-400 mb-6 text-sm leading-relaxed">
-                            Enterprise marketplace platform where businesses and their clients interact seamlessly. 
-                            Features advanced security, real-time communication, and integrated payment systems.
+                            Revolutionary queue management system for businesses worldwide. From public administrations to clinics and retail - 
+                            over 500+ enterprises use Turnyx to eliminate waiting times and improve customer experience.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-6">
                             <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-blue">React</span>
                             <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-blue">Node.js</span>
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-blue">MongoDB</span>
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-blue">AWS</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-blue">Real-time</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-blue">PDF Gen</span>
                         </div>
                         <div class="flex justify-between items-center">
                             <div class="flex space-x-2">
                                 <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
-                                <span class="text-sm text-gray-500">Production</span>
+                                <span class="text-sm text-gray-500">500+ Enterprises</span>
                             </div>
-                            <button onclick="openProjectModal('01mana')" class="text-cyber-blue hover:text-white transition-colors font-semibold">
-                                Learn More →
-                            </button>
+                            <a href="https://turnyx.com" target="_blank" class="text-cyber-blue hover:text-white transition-colors font-semibold">
+                                Visit Platform →
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 2: devrated.com -->
-                <div class="project-card card-hover bg-cyber-gray/50 rounded-3xl overflow-hidden opacity-0" data-status="live" data-category="saas">
+                <!-- Project 2: 01mana.com -->
+                <div class="project-card card-hover bg-cyber-gray/50 rounded-3xl overflow-hidden opacity-0" data-status="live" data-category="web">
                     <div class="relative">
-                        <div class="video-container aspect-video bg-gradient-to-br from-cyber-purple/20 to-cyber-green/20 flex items-center justify-center">
+                        <div class="aspect-video bg-gradient-to-br from-cyber-purple/20 to-cyber-green/20 flex items-center justify-center">
                             <div class="text-center">
                                 <div class="w-20 h-20 mx-auto mb-4 cyber-gradient rounded-full flex items-center justify-center">
                                     <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00.951-.69l1.519-4.674z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H9m0 0H5m0 0h2M7 7h10M7 11h10M7 15h10"/>
                                     </svg>
                                 </div>
-                                <button onclick="openProjectModal('devrated')" class="text-cyber-purple hover:text-white transition-colors">
-                                    View SaaS →
-                                </button>
+                                <p class="text-cyber-purple font-semibold">B2B Marketplace</p>
                             </div>
                         </div>
                         <div class="absolute top-4 right-4">
@@ -395,47 +366,45 @@
                         </div>
                         <div class="absolute top-4 left-4">
                             <span class="bg-cyber-purple/80 text-white px-4 py-2 rounded-full text-sm font-bold backdrop-blur-sm">
-                                SaaS Tool
+                                Web Platform
                             </span>
                         </div>
                     </div>
                     <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-4">devrated.com</h3>
+                        <h3 class="text-2xl font-bold mb-4">01mana.com</h3>
                         <p class="text-gray-400 mb-6 text-sm leading-relaxed">
-                            SaaS platform enabling developers to collect authentic user feedback on their creations 
-                            and get professional evaluations. Features AI-powered analytics and reputation scoring.
+                            Enterprise marketplace platform revolutionizing business-client interactions. Features advanced security, 
+                            real-time communication, integrated payments, and comprehensive analytics dashboard.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-purple">Vue.js</span>
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-purple">Python</span>
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-purple">PostgreSQL</span>
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-purple">AI/ML</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-purple">React</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-purple">Node.js</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-purple">MongoDB</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-purple">AWS</span>
                         </div>
                         <div class="flex justify-between items-center">
                             <div class="flex space-x-2">
                                 <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
-                                <span class="text-sm text-gray-500">Active Users</span>
+                                <span class="text-sm text-gray-500">Production</span>
                             </div>
-                            <button onclick="openProjectModal('devrated')" class="text-cyber-purple hover:text-white transition-colors font-semibold">
-                                Learn More →
-                            </button>
+                            <a href="https://01mana.com" target="_blank" class="text-cyber-purple hover:text-white transition-colors font-semibold">
+                                Visit Platform →
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 3: OffDem Extension -->
-                <div class="project-card card-hover bg-cyber-gray/50 rounded-3xl overflow-hidden opacity-0" data-status="live" data-category="web">
+                <!-- Project 3: devrated.com -->
+                <div class="project-card card-hover bg-cyber-gray/50 rounded-3xl overflow-hidden opacity-0" data-status="live" data-category="saas">
                     <div class="relative">
-                        <div class="video-container aspect-video bg-gradient-to-br from-cyber-green/20 to-cyber-blue/20 flex items-center justify-center">
+                        <div class="aspect-video bg-gradient-to-br from-cyber-green/20 to-cyber-blue/20 flex items-center justify-center">
                             <div class="text-center">
                                 <div class="w-20 h-20 mx-auto mb-4 cyber-gradient rounded-full flex items-center justify-center">
                                     <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00.951-.69l1.519-4.674z"/>
                                     </svg>
                                 </div>
-                                <button onclick="openProjectModal('offdem-web')" class="text-cyber-green hover:text-white transition-colors">
-                                    View Extension →
-                                </button>
+                                <p class="text-cyber-green font-semibold">Developer Platform</p>
                             </div>
                         </div>
                         <div class="absolute top-4 right-4">
@@ -445,51 +414,45 @@
                         </div>
                         <div class="absolute top-4 left-4">
                             <span class="bg-cyber-green/80 text-white px-4 py-2 rounded-full text-sm font-bold backdrop-blur-sm">
-                                Browser Extension
+                                SaaS Tool
                             </span>
                         </div>
                     </div>
                     <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-4">OffDem Web Extension</h3>
+                        <h3 class="text-2xl font-bold mb-4">devrated.com</h3>
                         <p class="text-gray-400 mb-6 text-sm leading-relaxed">
-                            Productivity browser extension that blocks distracting websites for specified durations. 
-                            Features smart scheduling, whitelist management, and productivity analytics.
+                            SaaS platform enabling developers to collect authentic user feedback and get professional evaluations. 
+                            Features AI-powered analytics, reputation scoring, and comprehensive review management.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-green">JavaScript</span>
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-green">Chrome API</span>
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-green">LocalStorage</span>
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-green">Manifest V3</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-green">Vue.js</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-green">Python</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-green">PostgreSQL</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-green">AI/ML</span>
                         </div>
                         <div class="flex justify-between items-center">
                             <div class="flex space-x-2">
                                 <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
-                                <span class="text-sm text-gray-500">Chrome Store</span>
+                                <span class="text-sm text-gray-500">Active Users</span>
                             </div>
-                            <button onclick="openProjectModal('offdem-web')" class="text-cyber-green hover:text-white transition-colors font-semibold">
-                                Learn More →
-                            </button>
+                            <a href="https://devrated.com" target="_blank" class="text-cyber-green hover:text-white transition-colors font-semibold">
+                                Visit Platform →
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 4: OffDem Mobile App -->
-                <div class="project-card card-hover bg-cyber-gray/50 rounded-3xl overflow-hidden opacity-0" data-status="live" data-category="mobile">
+                <!-- Project 4: OffDem Extension -->
+                <div class="project-card card-hover bg-cyber-gray/50 rounded-3xl overflow-hidden opacity-0" data-status="live" data-category="web">
                     <div class="relative">
-                        <div class="video-container aspect-video bg-gradient-to-br from-cyber-red/20 to-cyber-orange/20 flex items-center justify-center">
+                        <div class="aspect-video bg-gradient-to-br from-cyber-red/20 to-cyber-orange/20 flex items-center justify-center">
                             <div class="text-center">
                                 <div class="w-20 h-20 mx-auto mb-4 cyber-gradient rounded-full flex items-center justify-center">
                                     <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                                     </svg>
                                 </div>
-                                <button onclick="openProjectModal('offdem-mobile')" class="text-cyber-red hover:text-white transition-colors">
-                                    View App →
-                                </button>
-                            </div>
-                        </div>
-                        <div class="absolute top-4 right-4">
-                            <span class="status-badge bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+                                <p class="text-cyber-red font-semibold">Productivity Tool</p>
                             </div>
                         </div>
                         <div class="absolute top-4 right-4">
@@ -499,6 +462,54 @@
                         </div>
                         <div class="absolute top-4 left-4">
                             <span class="bg-cyber-red/80 text-white px-4 py-2 rounded-full text-sm font-bold backdrop-blur-sm">
+                                Browser Extension
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-4">OffDem Web Extension</h3>
+                        <p class="text-gray-400 mb-6 text-sm leading-relaxed">
+                            Productivity browser extension blocking distracting websites for specified durations. 
+                            Features smart scheduling, whitelist management, and productivity analytics.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-red">JavaScript</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-red">Chrome API</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-red">Manifest V3</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-red">Analytics</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="flex space-x-2">
+                                <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+                                <span class="text-sm text-gray-500">Chrome Store</span>
+                            </div>
+                            <button class="text-cyber-red hover:text-white transition-colors font-semibold">
+                                View Extension →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5: OffDem Mobile App -->
+                <div class="project-card card-hover bg-cyber-gray/50 rounded-3xl overflow-hidden opacity-0" data-status="live" data-category="mobile">
+                    <div class="relative">
+                        <div class="aspect-video bg-gradient-to-br from-cyber-blue/20 to-cyber-red/20 flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="w-20 h-20 mx-auto mb-4 cyber-gradient rounded-full flex items-center justify-center">
+                                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <p class="text-cyber-blue font-semibold">Call Management</p>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="status-badge bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+                                Live
+                            </span>
+                        </div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-cyber-blue/80 text-white px-4 py-2 rounded-full text-sm font-bold backdrop-blur-sm">
                                 Mobile App
                             </span>
                         </div>
@@ -506,40 +517,38 @@
                     <div class="p-8">
                         <h3 class="text-2xl font-bold mb-4">OffDem Mobile</h3>
                         <p class="text-gray-400 mb-6 text-sm leading-relaxed">
-                            Android application that manages availability status and automatically responds to calls 
-                            with custom messages when you're unavailable. Features smart scheduling and VIP contacts.
+                            Android app managing availability status and automatically responding to calls with custom messages 
+                            when unavailable. Features smart scheduling and VIP contacts management.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-red">Kotlin</span>
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-red">Android SDK</span>
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-red">Room DB</span>
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-red">Notifications</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-blue">Kotlin</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-blue">Android SDK</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-blue">Room DB</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-blue">Auto-Response</span>
                         </div>
                         <div class="flex justify-between items-center">
                             <div class="flex space-x-2">
                                 <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
                                 <span class="text-sm text-gray-500">Play Store</span>
                             </div>
-                            <button onclick="openProjectModal('offdem-mobile')" class="text-cyber-red hover:text-white transition-colors font-semibold">
-                                Learn More →
+                            <button class="text-cyber-blue hover:text-white transition-colors font-semibold">
+                                View App →
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 5: SecureAuth Platform -->
-                <div class="project-card card-hover bg-cyber-gray/50 rounded-3xl overflow-hidden opacity-0" data-status="development" data-category="web">
+                <!-- Project 6: Lexifever -->
+                <div class="project-card card-hover bg-cyber-gray/50 rounded-3xl overflow-hidden opacity-0" data-status="development" data-category="saas">
                     <div class="relative">
-                        <div class="video-container aspect-video bg-gradient-to-br from-cyber-blue/20 to-cyber-red/20 flex items-center justify-center">
+                        <div class="aspect-video bg-gradient-to-br from-cyber-purple/20 to-cyber-green/20 flex items-center justify-center">
                             <div class="text-center">
                                 <div class="w-20 h-20 mx-auto mb-4 cyber-gradient rounded-full flex items-center justify-center">
                                     <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                                     </svg>
                                 </div>
-                                <button onclick="openProjectModal('secureauth')" class="text-cyber-blue hover:text-white transition-colors">
-                                    View Progress →
-                                </button>
+                                <p class="text-cyber-purple font-semibold">AI Language Learning</p>
                             </div>
                         </div>
                         <div class="absolute top-4 right-4">
@@ -548,81 +557,31 @@
                             </span>
                         </div>
                         <div class="absolute top-4 left-4">
-                            <span class="bg-cyber-blue/80 text-white px-4 py-2 rounded-full text-sm font-bold backdrop-blur-sm">
-                                Security Platform
-                            </span>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-4">SecureAuth Platform</h3>
-                        <p class="text-gray-400 mb-6 text-sm leading-relaxed">
-                            Next-generation authentication platform with biometric verification, zero-trust architecture, 
-                            and quantum-resistant encryption for enterprise security.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-blue">Go</span>
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-blue">Blockchain</span>
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-blue">Biometrics</span>
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-blue">Quantum</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <div class="flex space-x-2">
-                                <span class="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></span>
-                                <span class="text-sm text-gray-500">75% Complete</span>
-                            </div>
-                            <button onclick="openProjectModal('secureauth')" class="text-cyber-blue hover:text-white transition-colors font-semibold">
-                                Learn More →
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 6: AI Code Analyzer -->
-                <div class="project-card card-hover bg-cyber-gray/50 rounded-3xl overflow-hidden opacity-0" data-status="development" data-category="saas">
-                    <div class="relative">
-                        <div class="video-container aspect-video bg-gradient-to-br from-cyber-purple/20 to-cyber-green/20 flex items-center justify-center">
-                            <div class="text-center">
-                                <div class="w-20 h-20 mx-auto mb-4 cyber-gradient rounded-full flex items-center justify-center">
-                                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                                    </svg>
-                                </div>
-                                <button onclick="openProjectModal('ai-analyzer')" class="text-cyber-purple hover:text-white transition-colors">
-                                    View Beta →
-                                </button>
-                            </div>
-                        </div>
-                        <div class="absolute top-4 right-4">
-                            <span class="status-badge bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold animate-pulse">
-                                Beta Testing
-                            </span>
-                        </div>
-                        <div class="absolute top-4 left-4">
                             <span class="bg-cyber-purple/80 text-white px-4 py-2 rounded-full text-sm font-bold backdrop-blur-sm">
-                                AI Tool
+                                AI Platform
                             </span>
                         </div>
                     </div>
                     <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-4">AI Code Analyzer</h3>
+                        <h3 class="text-2xl font-bold mb-4">Lexifever</h3>
                         <p class="text-gray-400 mb-6 text-sm leading-relaxed">
-                            AI-powered code analysis platform that detects security vulnerabilities, performance issues, 
-                            and provides intelligent optimization suggestions for developers.
+                            AI-powered English vocabulary improvement platform for French speakers. Generate custom texts with real-time 
+                            French translations, helping users expand their English vocabulary naturally.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-purple">Python</span>
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-purple">TensorFlow</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-purple">AI/ML</span>
                             <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-purple">NLP</span>
-                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-purple">Docker</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-purple">Translation</span>
+                            <span class="tech-stack-badge px-3 py-1 rounded-full text-xs text-cyber-purple">Learning</span>
                         </div>
                         <div class="flex justify-between items-center">
                             <div class="flex space-x-2">
                                 <span class="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></span>
-                                <span class="text-sm text-gray-500">Beta Phase</span>
+                                <span class="text-sm text-gray-500">Development</span>
                             </div>
-                            <button onclick="openProjectModal('ai-analyzer')" class="text-cyber-purple hover:text-white transition-colors font-semibold">
-                                Learn More →
-                            </button>
+                            <a href="https://lexifever.com" target="_blank" class="text-cyber-purple hover:text-white transition-colors font-semibold">
+                                Coming Soon →
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -631,89 +590,130 @@
         </div>
     </section>
 
-    <!-- Project Modal -->
-    <div id="project-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="modal bg-cyber-gray rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto border border-cyber-blue/30">
-            <div class="p-10">
-                <div class="flex justify-between items-start mb-8">
-                    <div>
-                        <h2 id="modal-title" class="text-4xl font-bold mb-4"></h2>
-                        <div class="flex space-x-4">
-                            <span id="modal-category" class="px-4 py-2 rounded-full text-sm font-bold"></span>
-                            <span id="modal-status" class="px-4 py-2 rounded-full text-sm font-bold"></span>
-                        </div>
-                    </div>
-                    <button onclick="closeProjectModal()" class="text-gray-400 hover:text-white transition-colors">
-                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
+    <!-- Custom Projects CTA Section -->
+    <section class="py-32 cta-section relative overflow-hidden">
+        <div class="absolute inset-0 security-grid opacity-10"></div>
+        <div class="scan-line"></div>
+        
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="max-w-5xl mx-auto">
+                <div class="mb-12">
+                    <h2 class="text-5xl md:text-7xl font-bold mb-8 leading-tight">
+                        Need a <span class="cyber-gradient bg-clip-text text-transparent">Custom</span><br>
+                        Solution?
+                    </h2>
+                    <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                        Every business is unique, and so are its challenges. At ExternaLux6, we don't just build software - 
+                        we craft tailored solutions that solve real problems and drive real results. Whether you're a startup 
+                        with a revolutionary idea or an enterprise needing specialized tools, we turn your vision into reality.
+                    </p>
                 </div>
-                
-                <div class="grid md:grid-cols-2 gap-10">
-                    <div>
-                        <div id="modal-demo" class="aspect-video bg-black rounded-2xl mb-8 flex items-center justify-center border border-cyber-blue/30">
-                            <div class="text-center">
-                                <svg class="w-20 h-20 mx-auto mb-4 text-cyber-blue" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                                <p class="text-gray-400">Live Demo Available</p>
-                            </div>
-                        </div>
-                        
-                        <div class="space-y-6">
-                            <div>
-                                <h4 class="font-bold mb-3 text-lg">Tech Stack</h4>
-                                <div id="modal-technologies" class="flex flex-wrap gap-2"></div>
-                            </div>
-                            
-                            <div>
-                                <h4 class="font-bold mb-3 text-lg">Team & Timeline</h4>
-                                <div id="modal-team" class="text-gray-400"></div>
-                            </div>
 
-                            <div>
-                                <h4 class="font-bold mb-3 text-lg">Links</h4>
-                                <div id="modal-links" class="space-y-2"></div>
+                <div class="grid md:grid-cols-3 gap-8 mb-16">
+                    <div class="bg-cyber-gray/30 backdrop-blur-sm p-8 rounded-2xl border border-cyber-blue/20">
+                        <div class="w-16 h-16 mx-auto mb-6 cyber-gradient rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Enterprise Solutions</h3>
+                        <p class="text-gray-400">Scalable platforms, enterprise integrations, and business process automation tailored to your organization.</p>
+                    </div>
+
+                    <div class="bg-cyber-gray/30 backdrop-blur-sm p-8 rounded-2xl border border-cyber-purple/20">
+                        <div class="w-16 h-16 mx-auto mb-6 cyber-gradient rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Mobile Applications</h3>
+                        <p class="text-gray-400">Native iOS and Android apps, cross-platform solutions, and mobile-first experiences that users love.</p>
+                    </div>
+
+                    <div class="bg-cyber-gray/30 backdrop-blur-sm p-8 rounded-2xl border border-cyber-green/20">
+                        <div class="w-16 h-16 mx-auto mb-6 cyber-gradient rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Security Solutions</h3>
+                        <p class="text-gray-400">Advanced cybersecurity tools, secure authentication systems, and compliance-ready platforms.</p>
+                    </div>
+                </div>
+
+                <div class="bg-cyber-dark/50 backdrop-blur-md p-10 rounded-3xl border border-cyber-blue/30 mb-12">
+                    <h3 class="text-3xl font-bold mb-6">Why Choose ExternaLux6 for Your Project?</h3>
+                    <div class="grid md:grid-cols-2 gap-8 text-left">
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <span class="w-6 h-6 cyber-gradient rounded-full flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M9 12l2 2 4-4"/>
+                                    </svg>
+                                </span>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-2">Human-Centered Design</h4>
+                                    <p class="text-gray-400">We build with people in mind, creating intuitive solutions that users actually want to use.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="w-6 h-6 cyber-gradient rounded-full flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M9 12l2 2 4-4"/>
+                                    </svg>
+                                </span>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-2">Security-First Approach</h4>
+                                    <p class="text-gray-400">Every line of code is written with security in mind, protecting your data and your users.</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div>
-                        <div class="space-y-8">
-                            <div>
-                                <h4 class="font-bold mb-4 text-lg">Project Overview</h4>
-                                <p id="modal-description" class="text-gray-400 leading-relaxed text-lg"></p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <span class="w-6 h-6 cyber-gradient rounded-full flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M9 12l2 2 4-4"/>
+                                    </svg>
+                                </span>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-2">Proven Track Record</h4>
+                                    <p class="text-gray-400">From startups to enterprises, our solutions serve thousands of users worldwide.</p>
+                                </div>
                             </div>
-                            
-                            <div>
-                                <h4 class="font-bold mb-4 text-lg">Key Features</h4>
-                                <ul id="modal-features" class="space-y-3 text-gray-400"></ul>
-                            </div>
-                            
-                            <div>
-                                <h4 class="font-bold mb-4 text-lg">Impact & Results</h4>
-                                <div id="modal-results" class="space-y-3 text-gray-400"></div>
-                            </div>
-                            
-                            <div class="pt-6 border-t border-gray-700">
-                                <div class="grid grid-cols-2 gap-6">
-                                    <div>
-                                        <p class="text-sm text-gray-500 mb-1">Development Time</p>
-                                        <p id="modal-duration" class="font-bold text-lg"></p>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm text-gray-500 mb-1">Status</p>
-                                        <p id="modal-project-status" class="font-bold text-lg"></p>
-                                    </div>
+                            <div class="flex items-start">
+                                <span class="w-6 h-6 cyber-gradient rounded-full flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M9 12l2 2 4-4"/>
+                                    </svg>
+                                </span>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-2">Ongoing Partnership</h4>
+                                    <p class="text-gray-400">We don't just deliver and disappear - we're here for the long haul with support and updates.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="text-center">
+                    <p class="text-2xl mb-8 text-gray-300">
+                        Ready to transform your idea into reality?
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                        <a href="mailto:externalux6team@gmail.com" class="inline-flex items-center px-12 py-6 cyber-gradient text-white font-bold rounded-full hover:scale-105 transition-all duration-300 cyber-glow animate-glow text-lg">
+                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                            Start Your Project Today
+                        </a>
+                        <p class="text-gray-400">
+                            or email us at <span class="text-cyber-blue font-semibold">externalux6team@gmail.com</span>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Footer -->
     <footer class="bg-cyber-gray py-20">
@@ -721,11 +721,9 @@
             <div class="grid md:grid-cols-4 gap-12">
                 <div class="md:col-span-2">
                     <div class="flex items-center space-x-3 mb-8">
-                        <div class="w-12 h-12 cyber-gradient rounded-xl flex items-center justify-center">
-                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                            </svg>
-                        </div>
+                        <img src="logo.png" 
+                             class="w-12 h-12 rounded-full object-cover border border-cyan-400" 
+                             alt="ExternaLux6 Logo">
                         <div class="text-3xl font-bold cyber-gradient bg-clip-text text-transparent">
                             ExternaLux6
                         </div>
@@ -757,9 +755,10 @@
                     <h3 class="text-xl font-semibold mb-8">Navigation</h3>
                     <ul class="space-y-4">
                         <li><a href="index.html" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">Home</a></li>
-                        <li><a href="#projects" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">Projects</a></li>
-                        <li><a href="index.html#services" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">Services</a></li>
-                        <li><a href="index.html#solutions" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">Solutions</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">About</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">Services</a></li>
+                        <li><a href="projects.html" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">Solutions</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-cyber-blue transition-colors duration-300">Contact</a></li>
                     </ul>
                 </div>
 
@@ -768,16 +767,9 @@
                     <ul class="space-y-4">
                         <li class="flex items-center text-gray-400">
                             <svg class="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            </svg>
-                            San Francisco, CA
-                        </li>
-                        <li class="flex items-center text-gray-400">
-                            <svg class="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             </svg>
-                            projects@externallux6.com
+                            externalux6team@gmail.com
                         </li>
                     </ul>
                 </div>
@@ -788,9 +780,11 @@
                     <p class="text-gray-400 text-sm">
                         © 2024 ExternaLux6. All rights reserved.
                     </p>
-                    <p class="text-gray-400 text-sm mt-4 md:mt-0">
-                        Innovation • Security • Excellence
-                    </p>
+                    <div class="flex space-x-8 mt-4 md:mt-0">
+                        <a href="#" class="text-gray-400 hover:text-cyber-blue text-sm transition-colors duration-300">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-cyber-blue text-sm transition-colors duration-300">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-cyber-blue text-sm transition-colors duration-300">Security</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -799,192 +793,6 @@
     <script>
         // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);
-
-        // Project data with real ExternaLux6 projects
-        const projectData = {
-            '01mana': {
-                title: "01mana.com",
-                category: "Web Platform",
-                status: "Live",
-                description: "Enterprise marketplace platform that revolutionizes how businesses and their clients interact. Features advanced security protocols, real-time communication systems, integrated payment processing, and comprehensive analytics dashboard. Built with scalability and security as core principles.",
-                features: [
-                    "Secure business-to-client marketplace",
-                    "Real-time messaging and notifications",
-                    "Integrated payment processing",
-                    "Advanced user authentication",
-                    "Comprehensive analytics dashboard",
-                    "Mobile-responsive design",
-                    "API-first architecture",
-                    "Multi-language support"
-                ],
-                results: [
-                    "Successfully launched and operational",
-                    "Secure SSL implementation",
-                    "Scalable cloud infrastructure",
-                    "Enterprise-grade security features",
-                    "Positive user feedback and adoption"
-                ],
-                technologies: ["React", "Node.js", "MongoDB", "AWS", "Redis", "Socket.io", "Stripe API", "JWT"],
-                team: "4 developers • 8 months",
-                duration: "8 months",
-                projectStatus: "Production",
-                links: [
-                    { name: "Visit Platform", url: "https://01mana.com", type: "external" }
-                ]
-            },
-            'devrated': {
-                title: "devrated.com",
-                category: "SaaS Tool",
-                status: "Live",
-                description: "Revolutionary SaaS platform that enables developers to collect authentic user feedback on their creations and receive professional evaluations. Features AI-powered analytics, reputation scoring system, and comprehensive review management tools.",
-                features: [
-                    "User feedback collection system",
-                    "Professional developer evaluations",
-                    "AI-powered sentiment analysis",
-                    "Reputation scoring algorithm",
-                    "Portfolio showcase features",
-                    "Review management dashboard",
-                    "Integration with development tools",
-                    "Analytics and reporting"
-                ],
-                results: [
-                    "Active developer community",
-                    "Positive platform adoption",
-                    "AI analytics providing insights",
-                    "Growing user base",
-                    "Successful feedback loops"
-                ],
-                technologies: ["Vue.js", "Python", "PostgreSQL", "TensorFlow", "Docker", "Redis", "Celery", "Nginx"],
-                team: "5 developers • 10 months",
-                duration: "10 months",
-                projectStatus: "Production",
-                links: [
-                    { name: "Visit Platform", url: "https://devrated.com", type: "external" }
-                ]
-            },
-            'offdem-web': {
-                title: "OffDem Web Extension",
-                category: "Browser Extension",
-                status: "Live",
-                description: "Productivity-focused browser extension that helps users maintain focus by blocking distracting websites for specified durations. Features intelligent scheduling, whitelist management, productivity analytics, and customizable blocking strategies.",
-                features: [
-                    "Website blocking with custom durations",
-                    "Smart scheduling system",
-                    "Whitelist management",
-                    "Productivity analytics and reports",
-                    "Focus session tracking",
-                    "Break reminders",
-                    "Customizable blocking strategies",
-                    "Cross-browser compatibility"
-                ],
-                results: [
-                    "Available on Chrome Web Store",
-                    "Positive user reviews",
-                    "Improved user productivity metrics",
-                    "Regular feature updates",
-                    "Growing user adoption"
-                ],
-                technologies: ["JavaScript", "Chrome Extension API", "LocalStorage", "Manifest V3", "CSS3", "HTML5"],
-                team: "2 developers • 4 months",
-                duration: "4 months",
-                team: "2 developers • 4 months",
-                duration: "4 months",
-                projectStatus: "Production",
-                links: [
-                    { name: "Chrome Web Store", url: "#", type: "store" }
-                ]
-            },
-            'offdem-mobile': {
-                title: "OffDem Mobile",
-                category: "Mobile App",
-                status: "Live",
-                description: "Android application that intelligently manages your availability status and automatically responds to incoming calls with custom messages when you're unavailable. Features smart scheduling, VIP contact management, and customizable auto-responses.",
-                features: [
-                    "Automatic call management",
-                    "Custom unavailability messages",
-                    "Smart scheduling system",
-                    "VIP contact whitelist",
-                    "Do Not Disturb integration",
-                    "Call log and analytics",
-                    "Multiple response templates",
-                    "Battery optimization"
-                ],
-                results: [
-                    "Available on Google Play Store",
-                    "Positive user ratings",
-                    "Effective call management",
-                    "Battery-efficient operation",
-                    "Regular feature updates"
-                ],
-                technologies: ["Kotlin", "Android SDK", "Room Database", "WorkManager", "Notification API", "Telephony API"],
-                team: "3 developers • 6 months",
-                duration: "6 months",
-                projectStatus: "Production",
-                links: [
-                    { name: "Google Play Store", url: "#", type: "store" }
-                ]
-            },
-            'secureauth': {
-                title: "SecureAuth Platform",
-                category: "Security Platform",
-                status: "In Development",
-                description: "Next-generation authentication platform featuring biometric verification, zero-trust architecture, and quantum-resistant encryption. Designed for enterprise environments requiring the highest levels of security and compliance.",
-                features: [
-                    "Biometric authentication (fingerprint, face, voice)",
-                    "Zero-trust security architecture",
-                    "Quantum-resistant encryption",
-                    "Multi-factor authentication",
-                    "Risk-based authentication",
-                    "Enterprise SSO integration",
-                    "Compliance reporting",
-                    "Real-time threat detection"
-                ],
-                results: [
-                    "Core authentication engine completed",
-                    "Biometric integration in progress",
-                    "Security audits passed",
-                    "Beta testing with enterprise clients",
-                    "Quantum encryption implementation"
-                ],
-                technologies: ["Go", "Blockchain", "Biometric APIs", "Quantum Cryptography", "Kubernetes", "PostgreSQL"],
-                team: "8 security engineers • 18 months",
-                duration: "18 months",
-                projectStatus: "75% Complete",
-                links: [
-                    { name: "Technical Documentation", url: "#", type: "docs" }
-                ]
-            },
-            'ai-analyzer': {
-                title: "AI Code Analyzer",
-                category: "AI Tool",
-                status: "Beta Testing",
-                description: "AI-powered code analysis platform that detects security vulnerabilities, performance bottlenecks, and provides intelligent optimization suggestions. Uses advanced machine learning models trained on millions of code repositories.",
-                features: [
-                    "Automated security vulnerability detection",
-                    "Performance optimization suggestions",
-                    "Code quality scoring",
-                    "Multi-language support",
-                    "IDE integration plugins",
-                    "Continuous integration hooks",
-                    "Custom rule configuration",
-                    "Team collaboration features"
-                ],
-                results: [
-                    "Beta version deployed",
-                    "90% accuracy in vulnerability detection",
-                    "Integration with popular IDEs",
-                    "Positive feedback from beta users",
-                    "Machine learning models optimized"
-                ],
-                technologies: ["Python", "TensorFlow", "Natural Language Processing", "Docker", "Kubernetes", "Redis"],
-                team: "6 AI engineers • 12 months",
-                duration: "12 months",
-                projectStatus: "Beta Phase",
-                links: [
-                    { name: "Beta Access", url: "#", type: "beta" }
-                ]
-            }
-        };
 
         // Hero Animation
         gsap.set('.hero-content', { opacity: 0, y: 50 });
@@ -1073,97 +881,6 @@
             });
         }
 
-        // Modal Functions
-        function openProjectModal(projectId) {
-            const modal = document.getElementById('project-modal');
-            const data = projectData[projectId];
-            
-            if (!data) return;
-            
-            // Populate modal content
-            document.getElementById('modal-title').textContent = data.title;
-            document.getElementById('modal-description').textContent = data.description;
-            document.getElementById('modal-duration').textContent = data.duration;
-            document.getElementById('modal-project-status').textContent = data.projectStatus;
-            document.getElementById('modal-team').textContent = data.team;
-            
-            // Set category and status
-            const categoryEl = document.getElementById('modal-category');
-            const statusEl = document.getElementById('modal-status');
-            
-            categoryEl.textContent = data.category;
-            statusEl.textContent = data.status;
-            
-            // Set category colors
-            const categoryColors = {
-                'Web Platform': 'bg-cyber-blue/80',
-                'SaaS Tool': 'bg-cyber-purple/80',
-                'Browser Extension': 'bg-cyber-green/80',
-                'Mobile App': 'bg-cyber-red/80',
-                'Security Platform': 'bg-cyber-blue/80',
-                'AI Tool': 'bg-cyber-purple/80'
-            };
-            
-            const statusColors = {
-                'Live': 'bg-green-500',
-                'In Development': 'bg-orange-500',
-                'Beta Testing': 'bg-orange-500'
-            };
-            
-            categoryEl.className = `px-4 py-2 rounded-full text-sm font-bold text-white ${categoryColors[data.category]}`;
-            statusEl.className = `px-4 py-2 rounded-full text-sm font-bold text-white ${statusColors[data.status]}`;
-            
-            // Populate features
-            const featuresList = document.getElementById('modal-features');
-            featuresList.innerHTML = data.features.map(feature => 
-                `<li class="flex items-center"><span class="w-2 h-2 bg-cyber-blue rounded-full mr-4"></span>${feature}</li>`
-            ).join('');
-            
-            // Populate results
-            const resultsList = document.getElementById('modal-results');
-            resultsList.innerHTML = data.results.map(result => 
-                `<div class="flex items-center"><span class="w-2 h-2 bg-green-500 rounded-full mr-4"></span>${result}</div>`
-            ).join('');
-            
-            // Populate technologies
-            const techList = document.getElementById('modal-technologies');
-            techList.innerHTML = data.technologies.map(tech => 
-                `<span class="px-4 py-2 bg-cyber-blue/20 text-cyber-blue rounded-full text-sm font-semibold">${tech}</span>`
-            ).join('');
-
-            // Populate links
-            const linksList = document.getElementById('modal-links');
-            linksList.innerHTML = data.links.map(link => 
-                `<a href="${link.url}" class="inline-flex items-center text-cyber-blue hover:text-white transition-colors">
-                    <span class="mr-2">${link.name}</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                    </svg>
-                </a>`
-            ).join('');
-            
-            // Show modal with animation
-            modal.classList.remove('hidden');
-            gsap.fromTo(modal.querySelector('.modal'), 
-                { opacity: 0, scale: 0.8, y: 50 },
-                { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: 'power3.out' }
-            );
-        }
-
-        function closeProjectModal() {
-            const modal = document.getElementById('project-modal');
-            gsap.to(modal.querySelector('.modal'), {
-                opacity: 0,
-                scale: 0.8,
-                y: 50,
-                duration: 0.3,
-                ease: 'power3.in',
-                onComplete: () => {
-                    modal.classList.add('hidden');
-                }
-            });
-        }
-
         // Utility Functions
         function scrollToProjects() {
             document.getElementById('projects-grid').scrollIntoView({
@@ -1201,20 +918,6 @@
                     });
                 }
             });
-        });
-
-        // Close modal when clicking outside
-        document.getElementById('project-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeProjectModal();
-            }
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeProjectModal();
-            }
         });
 
         // Parallax effect for hero background
